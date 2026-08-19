@@ -348,6 +348,10 @@
       text-align: left;
     }
     .option-btn:hover { border-color: #b8a36c; background: #fffcf0; }
+    .option-btn:disabled { cursor: not-allowed; opacity: .54; }
+    .option-btn.locked { color: #7b675f; background: #f4eee7; }
+    .option-btn.answer-target { border-color: rgba(48,117,101,.52); background: #f4fbf7; }
+    .option-btn.answer-target:hover { border-color: var(--complete); background: #e8f4ed; }
     .option-key { display: grid; place-items: center; width: 27px; height: 27px; border-radius: 50%; color: #5e635e; background: #eee7d9; font-size: .82rem; font-weight: 800; }
     .feedback { margin-top: 22px; padding: 20px; border: 1px solid #d8cfbe; background: #faf6eb; }
     .feedback.correct { border-color: rgba(48,117,101,.4); background: #e8f3ee; }
@@ -358,6 +362,7 @@
     .feedback dl { margin: 15px 0 0; }
     .feedback dt { margin-top: 12px; color: #626b65; font-size: .82rem; font-weight: 800; letter-spacing: .09em; }
     .feedback dd { margin: 2px 0 0; color: #202925; line-height: 1.72; }
+    .retry-instruction { margin: 13px 0 0; color: #70463d; font-size: .96rem; font-weight: 700; }
     .completed-note { margin: 0 0 5px; color: var(--complete); font-weight: 800; }
 
     @media (max-width: 680px) {
@@ -380,7 +385,7 @@
     <div class="work-title"><span class="seal-dot" aria-hidden="true"></span><span>孔子《論仁、論孝、論君子》</span></div>
     <div class="header-actions">
       <div class="progress-wrap" aria-live="polite">
-        <span class="progress-label" id="progress-label">已完成 0 / 30</span>
+        <span class="progress-label" id="progress-label">得分 0 / 30　｜　已完成 0 / 30</span>
         <div class="progress-rail" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
       </div>
       <button class="reset-btn" type="button" id="reset-btn">重設進度</button>
@@ -604,7 +609,8 @@
     function updateProgress() {
       const count = completed.size;
       const total = terms.length;
-      document.getElementById('progress-label').textContent = `已完成 ${count} / ${total}`;
+      const score = count;
+      document.getElementById('progress-label').textContent = `得分 ${score} / ${total}　｜　已完成 ${count} / ${total}`;
       document.getElementById('progress-fill').style.width = `${(count / total) * 100}%`;
       document.querySelectorAll('.term').forEach(button => {
         const isComplete = completed.has(button.dataset.term);
@@ -614,6 +620,7 @@
       const panel = document.getElementById('unlock-panel');
       if (count === total) {
         panel.hidden = false;
+        panel.querySelector('.unlock-kicker').textContent = `得分 ${score} / ${total}　｜　${count} / ${total} 詞語已完成`;
         document.getElementById('summary-grid').innerHTML = terms.map(term => `<span class="summary-tag">${term.word}：${term.explanation.replace('「', '').replace('」', '')}</span>`).join('');
       } else {
         panel.hidden = true;
@@ -647,20 +654,36 @@
         </section>`;
     }
 
-    function renderQuestion(term) {
+    function renderQuestion(term, incorrectSelection = null) {
+      const answerPosition = optionOrder(term).indexOf(term.answer);
+      const retryFeedback = incorrectSelection === null ? '' : `
+        <section class="feedback incorrect">
+          <p class="feedback-status">未正確</p>
+          <dl>
+            <dt>正確答案</dt><dd>${letters[answerPosition]}. ${term.options[term.answer]}</dd>
+            <dt>詞義解釋</dt><dd>${term.explanation}</dd>
+            <dt>原句意思</dt><dd>${term.translation}</dd>
+          </dl>
+          <p class="retry-instruction">請直接選取正確答案，才會取得 1 分並完成此詞。</p>
+        </section>`;
       modalContent.innerHTML = `
         <p class="question">${term.question}</p>
+        ${retryFeedback}
         <div class="options">${optionOrder(term).map((optionIndex, index) => `
-          <button class="option-btn" type="button" data-option="${optionIndex}">
+          <button class="option-btn ${incorrectSelection !== null && optionIndex !== term.answer ? 'locked' : ''} ${incorrectSelection !== null && optionIndex === term.answer ? 'answer-target' : ''}" type="button" data-option="${optionIndex}" ${incorrectSelection !== null && optionIndex !== term.answer ? 'disabled' : ''}>
             <span class="option-key">${letters[index]}</span><span>${term.options[optionIndex]}</span>
           </button>`).join('')}
         </div>`;
       modalContent.querySelectorAll('[data-option]').forEach(button => {
         button.addEventListener('click', () => {
           const selectedIndex = Number(button.dataset.option);
-          completed.add(term.id);
-          updateProgress();
-          showFeedback(term, selectedIndex, false);
+          if (selectedIndex === term.answer) {
+            completed.add(term.id);
+            updateProgress();
+            showFeedback(term, selectedIndex, false);
+          } else {
+            renderQuestion(term, selectedIndex);
+          }
         });
       });
     }
