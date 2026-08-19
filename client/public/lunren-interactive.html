@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>孔子《論仁、論孝、論君子》｜原文及詞解</title>
+  <style>
+    /* 設計：墨卷課堂——暖紙底、深墨結構、黃箋詞語與青綠完成狀態；正文優先。 */
+    :root {
+      --ink: #1f2625;
+      --ink-soft: #38413f;
+      --paper: #fbf8f0;
+      --paper-deep: #eee6d6;
+      --line: #d8cfbe;
+      --vermilion: #a94235;
+      --highlight: #f5d66a;
+      --highlight-hover: #edc644;
+      --complete: #307565;
+      --complete-light: #dcebe4;
+      --muted: #6c736f;
+      --shadow: 0 24px 70px rgba(31, 38, 37, .15), 0 2px 0 rgba(255, 255, 255, .68) inset;
+      --ease-out: cubic-bezier(.23, 1, .32, 1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 16%, rgba(169, 66, 53, .048), transparent 22rem),
+        radial-gradient(circle at 92% 85%, rgba(61, 52, 38, .04), transparent 28rem),
+        repeating-linear-gradient(0deg, rgba(55, 47, 38, .018) 0, rgba(55, 47, 38, .018) 1px, transparent 1px, transparent 5px),
+        #ebe3d3;
+      font-family: "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+      line-height: 1.65;
+    }
+    button { font: inherit; }
+    button:focus-visible { outline: 3px solid rgba(169, 66, 53, .6); outline-offset: 3px; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 15px clamp(18px, 5vw, 74px);
+      color: #f8f3e7;
+      background: rgba(24, 31, 30, .97);
+      box-shadow: 0 7px 20px rgba(20, 25, 24, .18);
+    }
+    .work-title {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff9ea;
+      font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif;
+      font-size: clamp(1.05rem, 2.2vw, 1.38rem);
+      letter-spacing: .055em;
+      white-space: nowrap;
+    }
+    .seal-dot {
+      flex: 0 0 auto;
+      width: 13px;
+      height: 13px;
+      border-radius: 50% 43% 54% 46%;
+      background: var(--vermilion);
+      box-shadow: 0 0 0 4px rgba(169, 66, 53, .15);
+    }
+    .header-actions { display: flex; align-items: center; gap: 12px; }
+    .progress-wrap { min-width: min(180px, 26vw); }
+    .progress-label {
+      display: block;
+      margin-bottom: 5px;
+      color: #f8f3e7;
+      font-size: .9rem;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .progress-rail {
+      width: 100%;
+      height: 5px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .2);
+    }
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--highlight);
+      transition: width .2s var(--ease-out);
+    }
+    .reset-btn, .close-btn, .option-btn {
+      border: 0;
+      cursor: pointer;
+      transition: transform .16s var(--ease-out), background-color .16s var(--ease-out), border-color .16s var(--ease-out), color .16s var(--ease-out);
+    }
+    .reset-btn:active, .close-btn:active, .option-btn:active { transform: scale(.97); }
+    .reset-btn {
+      flex: 0 0 auto;
+      padding: 9px 13px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 7px;
+      color: #fff9ea;
+      background: transparent;
+      font-size: .9rem;
+      white-space: nowrap;
+    }
+    .reset-btn:hover { border-color: #d97a6e; color: #fff; background: rgba(169, 66, 53, .24); }
+
+    main { padding: clamp(30px, 5vw, 72px) 18px 88px; }
+    .reading-card {
+      position: relative;
+      width: min(1080px, 100%);
+      margin: 0 auto;
+      overflow: hidden;
+      border: 1px solid rgba(143, 125, 95, .32);
+      border-radius: 2px;
+      background:
+        linear-gradient(90deg, rgba(173, 151, 107, .045) 0, transparent 10%, transparent 90%, rgba(173, 151, 107, .035) 100%),
+        repeating-linear-gradient(90deg, transparent 0, transparent 14px, rgba(77, 68, 53, .011) 15px),
+        rgba(255, 253, 247, .97);
+      box-shadow: var(--shadow);
+    }
+    .reading-card::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 8px;
+      content: "";
+      background: var(--ink-soft);
+      opacity: .78;
+    }
+    .card-heading {
+      padding: clamp(44px, 7vw, 72px) clamp(30px, 9vw, 115px) clamp(34px, 5vw, 53px);
+      text-align: center;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(90deg, rgba(169,66,53,.035), transparent 24%),
+        linear-gradient(135deg, rgba(245,214,106,.12), transparent 50%),
+        #fffdf7;
+    }
+    .card-heading h1 {
+      margin: 0;
+      font-family: "BiauKai", "DFKai-SB", "PMingLiU", "Noto Serif TC", serif;
+      font-size: clamp(2rem, 5vw, 3.35rem);
+      font-weight: 500;
+      letter-spacing: .08em;
+      line-height: 1.2;
+    }
+    .card-heading p {
+      margin: 15px 0 0;
+      color: var(--vermilion);
+      font-size: .95rem;
+      font-weight: 700;
+      letter-spacing: .28em;
+    }
+    .reading-body { padding: clamp(34px, 6vw, 76px) clamp(28px, 8vw, 105px) 70px; }
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 56px 0 24px;
+      color: var(--ink);
+      font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif;
+      font-size: clamp(1.45rem, 3vw, 1.9rem);
+      font-weight: 500;
+      letter-spacing: .12em;
+    }
+    .section-heading:first-child { margin-top: 0; }
+    .section-heading::before {
+      width: 7px;
+      height: 7px;
+      content: "";
+      border-radius: 50%;
+      background: var(--vermilion);
+      box-shadow: 0 0 0 4px rgba(169, 66, 53, .1);
+    }
+    .section-heading::after { flex: 1; height: 1px; content: ""; background: var(--line); }
+    .passage {
+      position: relative;
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr);
+      gap: 18px;
+      padding: 23px 0;
+      border-bottom: 1px dashed rgba(126, 112, 89, .28);
+    }
+    .passage::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 18px;
+      width: 1px;
+      content: "";
+      background: linear-gradient(to bottom, transparent, rgba(56,65,63,.38) 16px, rgba(56,65,63,.38) calc(100% - 16px), transparent);
+    }
+    .passage-number {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      padding-top: 3px;
+      border: 1px solid rgba(169, 66, 53, .65);
+      border-radius: 50%;
+      color: var(--vermilion);
+      font-family: Georgia, serif;
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+    .passage-content { min-width: 0; }
+    .passage-content p {
+      margin: 0;
+      font-family: "BiauKai", "DFKai-SB", "PMingLiU", "Noto Serif TC", serif;
+      font-size: clamp(1.26rem, 2.45vw, 1.68rem);
+      line-height: 2.05;
+      letter-spacing: .047em;
+      text-align: justify;
+    }
+    .passage-content p + p { margin-top: 12px; }
+    .source {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 7px;
+      margin: 13px 0 0;
+      color: var(--muted);
+      font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+      font-size: .91rem;
+      letter-spacing: .03em;
+      text-align: right;
+    }
+    .source::before { content: "校注"; color: var(--vermilion); font-size: .72rem; font-weight: 800; letter-spacing: .1em; }
+    .term {
+      display: inline;
+      padding: .05em .14em .08em;
+      border: 0;
+      border-radius: .22em;
+      color: inherit;
+      background: linear-gradient(transparent 14%, rgba(245,214,106,.95) 14%, rgba(245,214,106,.95) 88%, transparent 88%);
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      cursor: pointer;
+      font: inherit;
+      text-decoration: none;
+      transition: color .16s var(--ease-out), background-color .16s var(--ease-out), filter .16s var(--ease-out);
+    }
+    .term:hover { filter: saturate(1.18) brightness(.96); }
+    .term.completed {
+      color: #1f5b4e;
+      background: linear-gradient(transparent 14%, rgba(131,190,170,.54) 14%, rgba(131,190,170,.54) 88%, transparent 88%);
+      font-weight: 700;
+    }
+    .term.completed::after { content: " ✓"; color: var(--complete); font-family: "PingFang TC", sans-serif; font-size: .75em; }
+
+    .unlock-panel {
+      margin-top: 42px;
+      padding: clamp(27px, 4vw, 40px);
+      border: 1px solid rgba(48, 117, 101, .32);
+      background: linear-gradient(135deg, rgba(220,235,228,.85), rgba(255,253,247,.95));
+    }
+    .unlock-panel[hidden] { display: none; }
+    .unlock-kicker { margin: 0; color: var(--complete); font-size: .85rem; font-weight: 800; letter-spacing: .15em; }
+    .unlock-panel h2 {
+      margin: 5px 0 10px;
+      font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif;
+      font-size: clamp(1.65rem, 3vw, 2.25rem);
+      font-weight: 500;
+    }
+    .unlock-panel p { margin: 0; color: #3e4f49; }
+    .summary-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .summary-tag {
+      padding: 6px 10px;
+      border: 1px solid rgba(48,117,101,.32);
+      border-radius: 999px;
+      color: #245a4e;
+      background: rgba(255,255,255,.58);
+      font-size: .9rem;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgba(20, 26, 25, .64);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .22s var(--ease-out);
+    }
+    .modal-backdrop.visible { opacity: 1; pointer-events: auto; }
+    .modal {
+      width: min(670px, 100%);
+      max-height: min(760px, calc(100vh - 40px));
+      overflow-y: auto;
+      padding: clamp(24px, 5vw, 42px);
+      border: 1px solid rgba(255,255,255,.23);
+      border-top: 5px solid var(--vermilion);
+      background: #fffdf7;
+      box-shadow: 0 26px 80px rgba(0,0,0,.33);
+      opacity: 0;
+      transform: translateY(16px) scale(.98);
+      transition: opacity .24s var(--ease-out), transform .24s var(--ease-out);
+    }
+    .modal-backdrop.visible .modal { opacity: 1; transform: translateY(0) scale(1); }
+    .modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
+    .modal-label { margin: 0 0 4px; color: var(--vermilion); font-size: .82rem; font-weight: 800; letter-spacing: .15em; }
+    .modal h2 { margin: 0; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: clamp(1.7rem, 4vw, 2.35rem); font-weight: 500; }
+    .close-btn { padding: 8px 11px; border: 1px solid #cfc6b8; border-radius: 6px; color: #4f5652; background: #fffdf7; font-size: .9rem; white-space: nowrap; }
+    .close-btn:hover { color: var(--vermilion); border-color: var(--vermilion); }
+    .context {
+      margin: 22px 0 20px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--highlight);
+      color: #46504a;
+      background: #f6f1e6;
+      font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif;
+      font-size: 1.12rem;
+      line-height: 1.85;
+    }
+    .question { margin: 0 0 16px; color: #28322f; font-size: 1.12rem; font-weight: 700; }
+    .options { display: grid; gap: 10px; }
+    .option-btn {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 13px 15px;
+      border: 1px solid #d8cfbe;
+      border-radius: 5px;
+      color: #26302d;
+      background: #fff;
+      text-align: left;
+    }
+    .option-btn:hover { border-color: #b8a36c; background: #fffcf0; }
+    .option-key { display: grid; place-items: center; width: 27px; height: 27px; border-radius: 50%; color: #5e635e; background: #eee7d9; font-size: .82rem; font-weight: 800; }
+    .feedback { margin-top: 22px; padding: 20px; border: 1px solid #d8cfbe; background: #faf6eb; }
+    .feedback.correct { border-color: rgba(48,117,101,.4); background: #e8f3ee; }
+    .feedback.incorrect { border-color: rgba(169,66,53,.36); background: #fbede8; }
+    .feedback-status { margin: 0; font-size: 1.14rem; font-weight: 800; }
+    .feedback.correct .feedback-status { color: var(--complete); }
+    .feedback.incorrect .feedback-status { color: var(--vermilion); }
+    .feedback dl { margin: 15px 0 0; }
+    .feedback dt { margin-top: 12px; color: #626b65; font-size: .82rem; font-weight: 800; letter-spacing: .09em; }
+    .feedback dd { margin: 2px 0 0; color: #202925; line-height: 1.72; }
+    .completed-note { margin: 0 0 5px; color: var(--complete); font-weight: 800; }
+
+    @media (max-width: 680px) {
+      .topbar { align-items: flex-start; min-height: 0; }
+      .work-title { max-width: 60%; white-space: normal; line-height: 1.35; }
+      .header-actions { flex-direction: column; align-items: flex-end; gap: 7px; }
+      .progress-wrap { min-width: 112px; }
+      .progress-label { font-size: .8rem; }
+      .reset-btn { padding: 6px 9px; font-size: .78rem; }
+      .passage { grid-template-columns: 35px minmax(0, 1fr); gap: 12px; }
+      .passage-number { width: 30px; height: 30px; font-size: .9rem; }
+      .reading-body { padding-left: 22px; padding-right: 22px; }
+      .source { font-size: .8rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="work-title"><span class="seal-dot" aria-hidden="true"></span><span>孔子《論仁、論孝、論君子》</span></div>
+    <div class="header-actions">
+      <div class="progress-wrap" aria-live="polite">
+        <span class="progress-label" id="progress-label">已完成 0 / 30</span>
+        <div class="progress-rail" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
+      </div>
+      <button class="reset-btn" type="button" id="reset-btn">重設進度</button>
+    </div>
+  </header>
+
+  <main>
+    <article class="reading-card">
+      <header class="card-heading">
+        <h1>論仁、論孝、論君子</h1>
+        <p>原文及詞解</p>
+      </header>
+
+      <div class="reading-body">
+        <h2 class="section-heading">論仁</h2>
+
+        <section class="passage" aria-label="第 1 段">
+          <div class="passage-number">1</div>
+          <div class="passage-content">
+            <p>子曰：「不仁者，不可以久處<button class="term" data-term="yue" type="button">約</button>，不可以長處樂。仁者安仁，知者<button class="term" data-term="li" type="button">利</button>仁。」</p>
+            <p class="source">（《里仁》第四）</p>
+          </div>
+        </section>
+
+        <section class="passage" aria-label="第 2 段">
+          <div class="passage-number">2</div>
+          <div class="passage-content">
+            <p>子曰：「富與貴，是人之所欲也；不以其道得之，不<button class="term" data-term="chu" type="button">處</button>也。貧與賤，是人之所惡也；不以其道<button class="term" data-term="dezhi" type="button">得之</button>，不<button class="term" data-term="qu" type="button">去</button>也。君子去仁，<button class="term" data-term="e" type="button">惡</button>乎成名？君子無<button class="term" data-term="zhongshi" type="button">終食之間</button>違仁，<button class="term" data-term="zaoci" type="button">造次</button>必於是，<button class="term" data-term="dianpei" type="button">顛沛</button>必於是。」</p>
+            <p class="source">（《里仁》第四）</p>
+          </div>
+        </section>
+
+        <section class="passage" aria-label="第 3 段">
+          <div class="passage-number">3</div>
+          <div class="passage-content">
+            <p>顏淵問仁。子曰：「<button class="term" data-term="ke" type="button">克</button>己復禮為仁。一日克己復禮，天下歸仁焉。為仁由己，而由人乎哉？」</p>
+            <p>顏淵曰：「請問其<button class="term" data-term="mu" type="button">目</button>。」子曰：「非禮勿視，非禮勿聽，非禮勿言，非禮勿動。」</p>
+            <p>顏淵曰：「回雖不敏，請事<button class="term" data-term="si-shi" type="button">斯</button>語矣。」</p>
+            <p class="source">（《顏淵》第十二）</p>
+          </div>
+        </section>
+
+        <section class="passage" aria-label="第 4 段">
+          <div class="passage-number">4</div>
+          <div class="passage-content">
+            <p>子曰：「志士仁人，無求生以害仁，有殺身以成仁。」</p>
+            <p class="source">（《衞靈公》第十五）</p>
+          </div>
+        </section>
+
+        <h2 class="section-heading">論孝</h2>
+
+        <section class="passage" aria-label="第 5 段">
+          <div class="passage-number">5</div>
+          <div class="passage-content">
+            <p>孟懿子問孝。子曰：「<button class="term" data-term="wuwei" type="button">無違</button>。」</p>
+            <p>樊遲御，子告之曰：「孟孫問孝於我，我對曰，無違。」樊遲曰：「何謂也？」子曰：「生，<button class="term" data-term="shi" type="button">事</button>之以禮；死，葬之以禮，祭之以禮。」</p>
+            <p class="source">（《為政》第二）</p>
+          </div>
+        </section>
+
+        <section class="passage" aria-label="第 6 段">
+          <div class="passage-number">6</div>
+          <div class="passage-content">
+            <p>子游問孝。子曰：「今之孝者，是謂能<button class="term" data-term="yang-gong" type="button">養</button>。至於犬馬，皆能有<button class="term" data-term="yang-yang" type="button">養</button>；不敬，何以別乎！」</p>
+            <p class="source">（《為政》第二）</p>
+          </div>
+        </section>
+
+        <section class="passage" aria-label="第 7 段">
+          <div class="passage-number">7</div>
+          <div class="passage-content">
+            <p>子曰：「事父母<button class="term" data-term="ji" type="button">幾</button>諫，見志不從，又敬不<button class="term" data-term="wei-buwei" type="button">違</button>，<button class="term" data-term="lao" type="button">勞</button>而不怨。」</p>
+            <p class="source">（《里仁》第四）</p>
+          </div>
+        </section>
+
+        <section class="passage" aria-label="第 8 段">
+          <div class="passage-number">8</div>
+          <div class="passage-content">
+            <p>子曰：「父母之年，不可不知也。一則以喜，一則以懼。」</p>
+            <p class="source">（《里仁》第四）</p>
+          </div>
+        </section>
+
+        <h2 class="section-heading">論君子</h2>
+
+        <section class="passage" aria-label="第 9 段">
+          <div class="passage-number">9</div>
+          <div class="passage-content">
+            <p>子曰：「君子不<button class="term" data-term="zhong" type="button">重</button>則不<button class="term" data-term="wei-wei" type="button">威</button>；學則不固。主忠信。無友不<button class="term" data-term="ru" type="button">如</button>己者。過則勿<button class="term" data-term="dan" type="button">憚</button>改。」</p>
+            <p class="source">（《學而》第一）</p>
+          </div>
+        </section>
+
+        <section class="passage" aria-label="第 10 段">
+          <div class="passage-number">10</div>
+          <div class="passage-content">
+            <p>子曰：「君子<button class="term" data-term="tandang" type="button">坦蕩蕩</button>，小人<button class="term" data-term="chang" type="button">長</button><button class="term" data-term="qiqi" type="button">戚戚</button>。」</p>
+            <p class="source">（《述而》第七）</p>
+          </div>
+        </section>
+
+        <section class="passage" aria-label="第 11 段">
+          <div class="passage-number">11</div>
+          <div class="passage-content">
+            <p>司馬牛問君子。子曰：「君子不憂不懼。」曰：「不憂不懼，<button class="term" data-term="si-wei" type="button">斯</button>謂之君子已乎？」子曰：「內省不疚，夫何憂何懼？」</p>
+            <p class="source">（《顏淵》第十二）</p>
+          </div>
+        </section>
+
+        <section class="passage" aria-label="第 12 段">
+          <div class="passage-number">12</div>
+          <div class="passage-content">
+            <p>子曰：「君子成人之美，不成人之惡。小人反是。」</p>
+            <p class="source">（《顏淵》第十二）</p>
+          </div>
+        </section>
+
+        <section class="passage" aria-label="第 13 段">
+          <div class="passage-number">13</div>
+          <div class="passage-content">
+            <p>子曰：「君子恥其言而過其行。」</p>
+            <p class="source">（《憲問》第十四）</p>
+          </div>
+        </section>
+
+        <section class="passage" aria-label="第 14 段">
+          <div class="passage-number">14</div>
+          <div class="passage-content">
+            <p>子曰：「君子義以為<button class="term" data-term="zhi" type="button">質</button>，禮以行之，<button class="term" data-term="sun" type="button">孫</button>以出之，信以成之。君子哉！」</p>
+            <p class="source">（《衞靈公》第十五）</p>
+          </div>
+        </section>
+
+        <section class="passage" aria-label="第 15 段">
+          <div class="passage-number">15</div>
+          <div class="passage-content">
+            <p>子曰：「君子<button class="term" data-term="bing" type="button">病</button>無能焉，不病人之不己知也。」</p>
+            <p class="source">（《衞靈公》第十五）</p>
+          </div>
+        </section>
+
+        <section class="passage" aria-label="第 16 段">
+          <div class="passage-number">16</div>
+          <div class="passage-content">
+            <p>子曰：「君子求諸己，小人求諸人。」</p>
+            <p class="source">（《衞靈公》第十五）</p>
+          </div>
+        </section>
+
+        <section class="unlock-panel" id="unlock-panel" hidden aria-live="polite">
+          <p class="unlock-kicker">30 / 30 詞語已完成</p>
+          <h2>全文語譯已解鎖</h2>
+          <p>原始資料未提供全文語譯。本頁保留原文閱讀，並整理本課已完成的重點詞語如下。</p>
+          <div class="summary-grid" id="summary-grid"></div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <div class="modal-backdrop" id="modal-backdrop" aria-hidden="true">
+    <section class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-head">
+        <div>
+          <p class="modal-label">詞語辨析</p>
+          <h2 id="modal-title"></h2>
+        </div>
+        <button class="close-btn" type="button" id="close-btn">關閉彈窗</button>
+      </div>
+      <p class="context" id="modal-context"></p>
+      <div id="modal-content"></div>
+    </section>
+  </div>
+
+  <script>
+    const terms = [
+      { id: 'yue', word: '約', sentence: '不仁者，不可以久處約，不可以長處樂。', question: '「約」在句中的意思是甚麼？', options: ['窮困、貧困', '約束、限制', '約定、盟約', '簡略、簡要'], answer: 0, explanation: '「約」指窮困、貧困。', translation: '不仁的人，不能長久地處於窮困之中，也不能長久地處於安樂之中。' },
+      { id: 'li', word: '利', sentence: '仁者安仁，知者利仁。', question: '「利」在句中的意思是甚麼？', options: ['利用', '得利', '順利', '利刃'], answer: 0, explanation: '「利」指利用；知者明白仁德的長遠利益，因而實行仁德。', translation: '仁者安於仁德，智者認識到仁德有長遠利益而實踐它。' },
+      { id: 'chu', word: '處', sentence: '富與貴，是人之所欲也；不以其道得之，不處也。', question: '「處」在句中的意思是甚麼？', options: ['接受', '居住', '處理', '安置'], answer: 0, explanation: '「處」指接受。', translation: '富貴是人所想要的；不用正當方法得到，就不接受。' },
+      { id: 'dezhi', word: '得之', sentence: '貧與賤，是人之所惡也；不以其道得之，不去也。', question: '「得之」在句中的意思是甚麼？', options: ['得以拋棄貧困', '得到它', '明白它', '依靠它'], answer: 0, explanation: '「得之」在此指得以拋棄貧困。', translation: '貧賤是人所厭惡的；不以正當方法得以擺脫，也不離棄它。' },
+      { id: 'qu', word: '去', sentence: '貧與賤，是人之所惡也；不以其道得之，不去也。', question: '「去」在句中的意思是甚麼？', options: ['離棄', '前往', '除去', '過去'], answer: 0, explanation: '「去」指離棄。', translation: '貧賤雖是人所厭惡的，不以正當方法擺脫，也不離棄它。' },
+      { id: 'e', word: '惡', sentence: '君子去仁，惡乎成名？', question: '「惡」在句中的意思是甚麼？', options: ['怎麼、如何', '厭惡、不喜', '邪惡、不善', '凶惡、可怕'], answer: 0, explanation: '「惡」讀作「烏」，是疑問代詞，指怎麼、如何。', translation: '君子離開仁德，怎能成名呢？' },
+      { id: 'zhongshi', word: '終食之間', sentence: '君子無終食之間違仁。', question: '「終食之間」在句中的意思是甚麼？', options: ['一頓飯的時間', '一日三餐之間', '吃完一桌飯', '用膳的地方'], answer: 0, explanation: '「終食之間」指吃完一頓飯的時間，形容很短的時間。', translation: '君子沒有一頓飯那麼短的時間離開仁德。' },
+      { id: 'zaoci', word: '造次', sentence: '造次必於是，顛沛必於是。', question: '「造次」在句中的意思是甚麼？', options: ['倉卒匆忙', '造訪次第', '創造次序', '胡亂編造'], answer: 0, explanation: '「造次」指倉卒匆忙。', translation: '在倉卒匆忙時也一定與仁德同在。' },
+      { id: 'dianpei', word: '顛沛', sentence: '造次必於是，顛沛必於是。', question: '「顛沛」在句中的意思是甚麼？', options: ['顛沛流離', '獲得利益', '跌倒疲倦', '反覆顛倒'], answer: 0, explanation: '「顛沛」指顛沛流離，形容困頓挫折的處境。', translation: '在困頓挫折時也一定與仁德同在。' },
+      { id: 'ke', word: '克', sentence: '克己復禮為仁。', question: '「克」在句中的意思是甚麼？', options: ['抑制、克制', '成功攻克', '刻薄苛刻', '剋扣減少'], answer: 0, explanation: '「克」指抑制、克制。', translation: '抑制自己的私慾，使言語行動都合於禮，就是仁。' },
+      { id: 'mu', word: '目', sentence: '顏淵曰：「請問其目。」', question: '「目」在句中的意思是甚麼？', options: ['綱目、要目', '眼睛目光', '目標目的', '目錄條文'], answer: 0, explanation: '「目」指綱目、要目。', translation: '顏淵說：「請問實踐仁德的要點是甚麼？」' },
+      { id: 'si-shi', word: '斯', sentence: '回雖不敏，請事斯語矣。', question: '「斯」在句中的意思是甚麼？', options: ['這', '於是', '從此', '斯文'], answer: 0, explanation: '「斯」指這。', translation: '我雖然不聰敏，請讓我實踐你這些說話。' },
+      { id: 'wuwei', word: '無違', sentence: '孟懿子問孝。子曰：「無違。」', question: '「無違」在句中的意思是甚麼？', options: ['不要違背禮節', '不要違背父命', '不要違反志向', '不必迴避事情'], answer: 0, explanation: '「無違」指不要違背禮節。', translation: '孟懿子問甚麼是孝，孔子說：「不要違背禮節。」' },
+      { id: 'shi', word: '事', sentence: '生，事之以禮；死，葬之以禮，祭之以禮。', question: '「事」在句中的意思是甚麼？', options: ['侍奉', '從事', '故事', '事件'], answer: 0, explanation: '「事」指侍奉。', translation: '父母在世時，依禮節侍奉他們；死後依禮節安葬和祭祀。' },
+      { id: 'yang-gong', word: '養', sentence: '今之孝者，是謂能養。', question: '「養」在句中的意思是甚麼？', options: ['供養', '飼養', '養育', '休養'], answer: 0, explanation: '「養」在「能養」中指供養。', translation: '如今所說的孝，只是能夠供養父母。' },
+      { id: 'yang-yang', word: '養', sentence: '至於犬馬，皆能有養；不敬，何以別乎！', question: '「養」在句中的意思是甚麼？', options: ['飼養', '供養', '養育', '涵養'], answer: 0, explanation: '「養」在「有養」中指飼養。', translation: '至於犬馬，都能得到飼養；若不敬奉父母，怎能分別呢？' },
+      { id: 'ji', word: '幾', sentence: '事父母幾諫，見志不從，又敬不違，勞而不怨。', question: '「幾」在句中的意思是甚麼？', options: ['輕微、婉轉', '幾乎、差不多', '幾個、數目', '機會、時機'], answer: 0, explanation: '「幾」指輕微、婉轉。', translation: '侍奉父母，若他們有不對之處，要婉轉勸止。' },
+      { id: 'wei-buwei', word: '違', sentence: '見志不從，又敬不違，勞而不怨。', question: '「違」在句中的意思是甚麼？', options: ['觸忤、冒犯', '違背禮節', '離開仁德', '當作違犯'], answer: 0, explanation: '「違」在此指觸忤、冒犯。', translation: '見到自己的意見沒有被接納，仍恭敬地不冒犯父母。' },
+      { id: 'lao', word: '勞', sentence: '見志不從，又敬不違，勞而不怨。', question: '「勞」在句中的意思是甚麼？', options: ['擔憂', '勞動', '勞累', '勞苦'], answer: 0, explanation: '「勞」指擔憂。', translation: '雖然心中擔憂，卻不抱怨。' },
+      { id: 'zhong', word: '重', sentence: '君子不重則不威；學則不固。', question: '「重」在句中的意思是甚麼？', options: ['莊重', '重量', '再次', '重視'], answer: 0, explanation: '「重」指莊重。', translation: '君子如果不莊重，就沒有威儀；即使學習，所學也不會牢固。' },
+      { id: 'wei-wei', word: '威', sentence: '君子不重則不威；學則不固。', question: '「威」在句中的意思是甚麼？', options: ['威儀', '威力', '威脅', '威風'], answer: 0, explanation: '「威」指威儀。', translation: '君子如果不莊重，就沒有威儀。' },
+      { id: 'ru', word: '如', sentence: '無友不如己者。', question: '「如」在句中的意思是甚麼？', options: ['及、類似', '如同、假若', '前往、到達', '若是、如果'], answer: 0, explanation: '「如」有「及」和「類似」兩種解釋。', translation: '君子不與不及自己的人，或與自己不同道的人交朋友。' },
+      { id: 'dan', word: '憚', sentence: '過則勿憚改。', question: '「憚」在句中的意思是甚麼？', options: ['害怕、畏懼', '厭惡、嫌棄', '阻擋、防範', '計較、顧忌'], answer: 0, explanation: '「憚」指害怕、畏懼。', translation: '有了過錯，就不要害怕改正。' },
+      { id: 'tandang', word: '坦蕩蕩', sentence: '君子坦蕩蕩，小人長戚戚。', question: '「坦蕩蕩」在句中的意思是甚麼？', options: ['心胸舒坦寬廣', '行路平坦寬闊', '說話坦白直率', '態度放任不拘'], answer: 0, explanation: '「坦蕩蕩」形容心胸舒坦寬廣。', translation: '君子心胸舒坦寬廣，小人卻常常局促憂愁。' },
+      { id: 'chang', word: '長', sentence: '君子坦蕩蕩，小人長戚戚。', question: '「長」在句中的意思是甚麼？', options: ['經常', '長久', '長度', '年長'], answer: 0, explanation: '「長」指經常。', translation: '小人經常局促憂愁。' },
+      { id: 'qiqi', word: '戚戚', sentence: '君子坦蕩蕩，小人長戚戚。', question: '「戚戚」在句中的意思是甚麼？', options: ['局促憂愁', '親戚相聚', '淒涼悲傷', '憤怒激動'], answer: 0, explanation: '「戚戚」指局促憂愁。', translation: '小人經常局促憂愁。' },
+      { id: 'si-wei', word: '斯', sentence: '不憂不懼，斯謂之君子已乎？', question: '「斯」在句中的意思是甚麼？', options: ['這', '於是', '從此', '斯文'], answer: 0, explanation: '「斯」指這。', translation: '這樣就可以稱為君子了嗎？' },
+      { id: 'zhi', word: '質', sentence: '君子義以為質，禮以行之，孫以出之，信以成之。', question: '「質」在句中的意思是甚麼？', options: ['原則', '質量', '本質', '質詢'], answer: 0, explanation: '「質」指原則，即以義為本。', translation: '君子處事，以合宜為原則；依禮節實行，用謙遜言語說出，並以誠信完成。' },
+      { id: 'sun', word: '孫', sentence: '君子義以為質，禮以行之，孫以出之，信以成之。', question: '「孫」在句中的意思是甚麼？', options: ['通「遜」，謙遜', '孫子、後代', '順從、依附', '損失、減少'], answer: 0, explanation: '「孫」通「遜」，指謙遜。', translation: '君子用謙遜的言語把義表達出來。' },
+      { id: 'bing', word: '病', sentence: '君子病無能焉，不病人之不己知也。', question: '「病」在句中的意思是甚麼？', options: ['擔憂', '疾病', '責備', '困苦'], answer: 0, explanation: '「病」指擔憂。', translation: '君子只擔憂自己沒有能力，不擔憂別人不了解自己。' }
+    ];
+
+    const completed = new Set();
+    let activeTerm = null;
+    let previousFocus = null;
+    const letters = ['A', 'B', 'C', 'D'];
+    const termById = Object.fromEntries(terms.map(term => [term.id, term]));
+    const modalBackdrop = document.getElementById('modal-backdrop');
+    const modalTitle = document.getElementById('modal-title');
+    const modalContext = document.getElementById('modal-context');
+    const modalContent = document.getElementById('modal-content');
+    const closeButton = document.getElementById('close-btn');
+
+    function updateProgress() {
+      const count = completed.size;
+      const total = terms.length;
+      document.getElementById('progress-label').textContent = `已完成 ${count} / ${total}`;
+      document.getElementById('progress-fill').style.width = `${(count / total) * 100}%`;
+      document.querySelectorAll('.term').forEach(button => {
+        const isComplete = completed.has(button.dataset.term);
+        button.classList.toggle('completed', isComplete);
+        button.setAttribute('aria-label', `${button.textContent}${isComplete ? '，已完成，可查看詞解' : '，點擊作答'}`);
+      });
+      const panel = document.getElementById('unlock-panel');
+      if (count === total) {
+        panel.hidden = false;
+        document.getElementById('summary-grid').innerHTML = terms.map(term => `<span class="summary-tag">${term.word}：${term.explanation.replace('「', '').replace('」', '')}</span>`).join('');
+      } else {
+        panel.hidden = true;
+      }
+    }
+
+    function optionOrder(term) {
+      const answerPosition = (terms.indexOf(term) * 3 + 1) % term.options.length;
+      const distractors = term.options.map((_, index) => index).filter(index => index !== term.answer);
+      const ordered = [];
+      let distractorIndex = 0;
+      for (let index = 0; index < term.options.length; index += 1) {
+        ordered.push(index === answerPosition ? term.answer : distractors[distractorIndex++]);
+      }
+      return ordered;
+    }
+
+    function showFeedback(term, selectedIndex, alreadyCompleted) {
+      const correct = selectedIndex === term.answer;
+      const answerPosition = optionOrder(term).indexOf(term.answer);
+      const status = alreadyCompleted ? '已完成' : (correct ? '正確' : '未正確');
+      modalContent.innerHTML = `
+        ${alreadyCompleted ? '<p class="completed-note">此詞語已完成，可重閱以下校注。</p>' : ''}
+        <section class="feedback ${alreadyCompleted || correct ? 'correct' : 'incorrect'}">
+          <p class="feedback-status">${status}</p>
+          <dl>
+            <dt>正確答案</dt><dd>${letters[answerPosition]}. ${term.options[term.answer]}</dd>
+            <dt>詞義解釋</dt><dd>${term.explanation}</dd>
+            <dt>原句意思</dt><dd>${term.translation}</dd>
+          </dl>
+        </section>`;
+    }
+
+    function renderQuestion(term) {
+      modalContent.innerHTML = `
+        <p class="question">${term.question}</p>
+        <div class="options">${optionOrder(term).map((optionIndex, index) => `
+          <button class="option-btn" type="button" data-option="${optionIndex}">
+            <span class="option-key">${letters[index]}</span><span>${term.options[optionIndex]}</span>
+          </button>`).join('')}
+        </div>`;
+      modalContent.querySelectorAll('[data-option]').forEach(button => {
+        button.addEventListener('click', () => {
+          const selectedIndex = Number(button.dataset.option);
+          completed.add(term.id);
+          updateProgress();
+          showFeedback(term, selectedIndex, false);
+        });
+      });
+    }
+
+    function openModal(termId, trigger) {
+      const term = termById[termId];
+      if (!term) return;
+      activeTerm = termId;
+      previousFocus = trigger;
+      modalTitle.textContent = term.word;
+      modalContext.textContent = `原句：${term.sentence}`;
+      if (completed.has(termId)) {
+        showFeedback(term, term.answer, true);
+      } else {
+        renderQuestion(term);
+      }
+      modalBackdrop.classList.add('visible');
+      modalBackdrop.setAttribute('aria-hidden', 'false');
+      closeButton.focus();
+    }
+
+    function closeModal() {
+      modalBackdrop.classList.remove('visible');
+      modalBackdrop.setAttribute('aria-hidden', 'true');
+      activeTerm = null;
+      if (previousFocus) previousFocus.focus();
+    }
+
+    document.querySelectorAll('.term').forEach(button => {
+      button.addEventListener('click', () => openModal(button.dataset.term, button));
+    });
+    closeButton.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', event => { if (event.target === modalBackdrop) closeModal(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && activeTerm) closeModal(); });
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      if (completed.size === 0 || window.confirm('確定要重設本課的完成進度嗎？')) {
+        completed.clear();
+        updateProgress();
+        if (activeTerm) closeModal();
+      }
+    });
+    updateProgress();
+  </script>
+</body>
+</html>

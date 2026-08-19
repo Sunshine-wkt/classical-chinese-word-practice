@@ -1,25 +1,14 @@
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { Streamdown } from 'streamdown';
+import { useEffect } from "react";
 
-/**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Best Practices, Design Guide and Common Pitfalls
- */
+/** 設計：墨卷課堂——根路徑只導向同一個離線互動篇章頁，讓預覽與交付內容一致。 */
 export default function Home() {
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
+  useEffect(() => {
+    window.location.replace("/lunren-interactive.html");
+  }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
-      </main>
-    </div>
+    <main className="min-h-screen grid place-items-center bg-stone-100 p-6 text-stone-800">
+      <a className="rounded border border-stone-400 bg-white px-4 py-3" href="/lunren-interactive.html">開啟互動篇章頁</a>
+    </main>
   );
 }
