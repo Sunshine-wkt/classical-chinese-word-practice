@@ -11,6 +11,14 @@
 
   <body>
     <div id="root"></div>
+    <script>
+      if (
+        window.location.hostname.endsWith(".github.io") &&
+        window.location.pathname.endsWith("/classical-chinese-word-practice/")
+      ) {
+        window.location.replace(new URL("practice-hub.html", window.location.href).href);
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 
