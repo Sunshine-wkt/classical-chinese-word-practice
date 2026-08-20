@@ -5,20 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>孔子《論仁、論孝、論君子》｜原文及詞解</title>
   <style>
-    /* 設計：墨卷課堂——暖紙底、深墨結構、黃箋詞語與青綠完成狀態；正文優先。 */
+    /* 設計：羅桂祥中學中文科墨卷課堂——校徽墨綠、暖紙底、黃箋詞語與硃砂錯誤提示；正文優先。 */
     :root {
-      --ink: #1f2625;
-      --ink-soft: #38413f;
+      --ink: #123c32;
+      --ink-soft: #004936;
+      --school-green: #004936;
+      --school-green-deep: #00382b;
       --paper: #fbf8f0;
       --paper-deep: #eee6d6;
       --line: #d8cfbe;
       --vermilion: #a94235;
       --highlight: #f5d66a;
       --highlight-hover: #edc644;
-      --complete: #307565;
-      --complete-light: #dcebe4;
+      --complete: #0c6b50;
+      --complete-light: #dfede6;
       --muted: #6c736f;
-      --shadow: 0 24px 70px rgba(31, 38, 37, .15), 0 2px 0 rgba(255, 255, 255, .68) inset;
+      --shadow: 0 24px 70px rgba(0, 57, 43, .15), 0 2px 0 rgba(255, 255, 255, .68) inset;
       --ease-out: cubic-bezier(.23, 1, .32, 1);
     }
 
@@ -29,7 +31,7 @@
       min-width: 320px;
       color: var(--ink);
       background:
-        radial-gradient(circle at 8% 16%, rgba(169, 66, 53, .048), transparent 22rem),
+        radial-gradient(circle at 8% 16%, rgba(0, 73, 54, .065), transparent 22rem),
         radial-gradient(circle at 92% 85%, rgba(61, 52, 38, .04), transparent 28rem),
         repeating-linear-gradient(0deg, rgba(55, 47, 38, .018) 0, rgba(55, 47, 38, .018) 1px, transparent 1px, transparent 5px),
         #ebe3d3;
@@ -37,7 +39,7 @@
       line-height: 1.65;
     }
     button { font: inherit; }
-    button:focus-visible { outline: 3px solid rgba(169, 66, 53, .6); outline-offset: 3px; }
+    button:focus-visible { outline: 3px solid rgba(0, 73, 54, .6); outline-offset: 3px; }
 
     .topbar {
       position: sticky;
@@ -50,8 +52,8 @@
       gap: 20px;
       padding: 15px clamp(18px, 5vw, 74px);
       color: #f8f3e7;
-      background: rgba(24, 31, 30, .97);
-      box-shadow: 0 7px 20px rgba(20, 25, 24, .18);
+      background: rgba(0, 57, 43, .98);
+      box-shadow: 0 7px 20px rgba(0, 42, 31, .22);
     }
     .work-title {
       min-width: 0;
@@ -71,6 +73,15 @@
       border-radius: 50% 43% 54% 46%;
       background: var(--vermilion);
       box-shadow: 0 0 0 4px rgba(169, 66, 53, .15);
+    }
+    .school-logo {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      border: 1px solid rgba(255,255,255,.26);
+      border-radius: 4px;
+      object-fit: cover;
+      background: var(--school-green);
     }
     .header-actions { display: flex; align-items: center; gap: 12px; }
     .progress-wrap { min-width: min(180px, 26vw); }
@@ -93,7 +104,7 @@
       width: 0%;
       height: 100%;
       border-radius: inherit;
-      background: var(--highlight);
+      background: var(--complete);
       transition: width .2s var(--ease-out);
     }
     .reset-btn, .close-btn, .option-btn {
@@ -143,7 +154,7 @@
       text-align: center;
       border-bottom: 1px solid var(--line);
       background:
-        linear-gradient(90deg, rgba(169,66,53,.035), transparent 24%),
+        linear-gradient(90deg, rgba(0,73,54,.05), transparent 24%),
         linear-gradient(135deg, rgba(245,214,106,.12), transparent 50%),
         #fffdf7;
     }
@@ -157,7 +168,7 @@
     }
     .card-heading p {
       margin: 15px 0 0;
-      color: var(--vermilion);
+      color: var(--school-green);
       font-size: .95rem;
       font-weight: 700;
       letter-spacing: .28em;
@@ -167,7 +178,9 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      margin: 56px 0 24px;
+      margin: 66px 0 27px;
+      padding: 15px 0 4px;
+      border-top: 1px solid rgba(0,73,54,.28);
       color: var(--ink);
       font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif;
       font-size: clamp(1.45rem, 3vw, 1.9rem);
@@ -180,10 +193,10 @@
       height: 7px;
       content: "";
       border-radius: 50%;
-      background: var(--vermilion);
-      box-shadow: 0 0 0 4px rgba(169, 66, 53, .1);
+      background: var(--school-green);
+      box-shadow: 0 0 0 4px rgba(0, 73, 54, .1);
     }
-    .section-heading::after { flex: 1; height: 1px; content: ""; background: var(--line); }
+    .section-heading::after { flex: 1; height: 1px; content: ""; background: linear-gradient(to right, rgba(0,73,54,.42), var(--line)); }
     .passage {
       position: relative;
       display: grid;
@@ -208,9 +221,9 @@
       width: 38px;
       height: 38px;
       padding-top: 3px;
-      border: 1px solid rgba(169, 66, 53, .65);
+      border: 1px solid rgba(0, 73, 54, .65);
       border-radius: 50%;
-      color: var(--vermilion);
+      color: var(--school-green);
       font-family: Georgia, serif;
       font-size: 1.05rem;
       line-height: 1.65;
@@ -237,7 +250,7 @@
       letter-spacing: .03em;
       text-align: right;
     }
-    .source::before { content: "校注"; color: var(--vermilion); font-size: .72rem; font-weight: 800; letter-spacing: .1em; }
+    .source::before { content: "校注"; color: var(--school-green); font-size: .72rem; font-weight: 800; letter-spacing: .1em; }
     .term {
       display: inline;
       padding: .05em .14em .08em;
@@ -263,8 +276,8 @@
     .unlock-panel {
       margin-top: 42px;
       padding: clamp(27px, 4vw, 40px);
-      border: 1px solid rgba(48, 117, 101, .32);
-      background: linear-gradient(135deg, rgba(220,235,228,.85), rgba(255,253,247,.95));
+      border: 1px solid rgba(0, 73, 54, .32);
+      background: linear-gradient(135deg, rgba(223,237,230,.92), rgba(255,253,247,.95));
     }
     .unlock-panel[hidden] { display: none; }
     .unlock-kicker { margin: 0; color: var(--complete); font-size: .85rem; font-weight: 800; letter-spacing: .15em; }
@@ -312,7 +325,7 @@
       overflow-y: auto;
       padding: clamp(24px, 5vw, 42px);
       border: 1px solid rgba(255,255,255,.23);
-      border-top: 5px solid var(--vermilion);
+      border-top: 5px solid var(--school-green);
       background: #fffdf7;
       box-shadow: 0 26px 80px rgba(0,0,0,.33);
       opacity: 0;
@@ -321,10 +334,10 @@
     }
     .modal-backdrop.visible .modal { opacity: 1; transform: translateY(0) scale(1); }
     .modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
-    .modal-label { margin: 0 0 4px; color: var(--vermilion); font-size: .82rem; font-weight: 800; letter-spacing: .15em; }
+    .modal-label { margin: 0 0 4px; color: var(--school-green); font-size: .82rem; font-weight: 800; letter-spacing: .15em; }
     .modal h2 { margin: 0; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: clamp(1.7rem, 4vw, 2.35rem); font-weight: 500; }
     .close-btn { padding: 8px 11px; border: 1px solid #cfc6b8; border-radius: 6px; color: #4f5652; background: #fffdf7; font-size: .9rem; white-space: nowrap; }
-    .close-btn:hover { color: var(--vermilion); border-color: var(--vermilion); }
+    .close-btn:hover { color: var(--school-green); border-color: var(--school-green); }
     .context {
       margin: 22px 0 20px;
       padding: 16px 18px;
@@ -366,11 +379,13 @@
     .feedback dt { margin-top: 12px; color: #626b65; font-size: .82rem; font-weight: 800; letter-spacing: .09em; }
     .feedback dd { margin: 2px 0 0; color: #202925; line-height: 1.72; }
     .attempt-count { margin: 0 0 15px; color: #68716c; font-size: .9rem; font-weight: 700; letter-spacing: .06em; }
+    .error-notice { margin: 0 0 13px; color: var(--vermilion); font-size: 1.12rem; font-weight: 800; letter-spacing: .08em; }
     .completed-note { margin: 0 0 5px; color: var(--complete); font-weight: 800; }
 
     @media (max-width: 680px) {
       .topbar { align-items: flex-start; min-height: 0; }
-      .work-title { max-width: 60%; white-space: normal; line-height: 1.35; }
+      .work-title { max-width: 66%; white-space: normal; line-height: 1.35; }
+      .school-logo { width: 34px; height: 34px; }
       .header-actions { flex-direction: column; align-items: flex-end; gap: 7px; }
       .progress-wrap { min-width: 112px; }
       .progress-label { font-size: .8rem; }
@@ -385,7 +400,7 @@
 </head>
 <body>
   <header class="topbar">
-    <div class="work-title"><span class="seal-dot" aria-hidden="true"></span><span>孔子《論仁、論孝、論君子》</span></div>
+    <div class="work-title"><img class="school-logo" src="/manus-storage/school-logo_6402c49c.jpeg" alt="羅桂祥中學中文科" /><span class="seal-dot" aria-hidden="true"></span><span>孔子《論仁、論孝、論君子》</span></div>
     <div class="header-actions">
       <div class="progress-wrap" aria-live="polite">
         <span class="progress-label" id="progress-label">首次答對 0 / 30　｜　已完成 0 / 30</span>
@@ -665,11 +680,12 @@
         </section>`;
     }
 
-    function renderQuestion(term) {
+    function renderQuestion(term, showError = false) {
       const attempts = attemptsByTerm.get(term.id) || 0;
       modalContent.innerHTML = `
         <p class="question">${term.question}</p>
         <p class="attempt-count">本題嘗試：${attempts} 次</p>
+        ${showError ? '<p class="error-notice" role="status">錯誤</p>' : ''}
         <div class="options">${optionOrder(term).map((optionIndex, index) => `
           <button class="option-btn" type="button" data-option="${optionIndex}">
             <span class="option-key">${letters[index]}</span><span>${term.options[optionIndex]}</span>
@@ -686,7 +702,7 @@
             updateProgress();
             showCompletion(term, false);
           } else {
-            renderQuestion(term);
+            renderQuestion(term, true);
           }
         });
       });

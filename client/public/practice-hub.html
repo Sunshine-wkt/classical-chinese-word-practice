@@ -5,16 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>指定篇章文言字詞互動練習</title>
   <style>
-    /* 設計：墨卷課堂的入口延展——深墨頂欄、暖紙空間、硃砂索引與紙本練習卡。 */
+    /* 設計：羅桂祥中學中文科墨卷課堂——校徽墨綠頂欄、暖紙空間、硃砂索引與紙本練習卡。 */
     :root {
-      --ink: #1f2625;
-      --ink-soft: #3b4541;
+      --ink: #123c32;
+      --ink-soft: #004936;
+      --school-green: #004936;
+      --school-green-deep: #00382b;
       --paper: #fffdf7;
       --ground: #ebe3d3;
       --line: #d8cfbe;
       --vermilion: #a94235;
       --yellow: #f5d66a;
-      --green: #307565;
+      --green: #004936;
       --muted: #6c736f;
       --ease-out: cubic-bezier(.23, 1, .32, 1);
     }
@@ -24,14 +26,14 @@
       margin: 0;
       color: var(--ink);
       background:
-        radial-gradient(circle at 9% 17%, rgba(169,66,53,.065), transparent 22rem),
-        radial-gradient(circle at 91% 82%, rgba(48,117,101,.055), transparent 26rem),
+        radial-gradient(circle at 9% 17%, rgba(0,73,54,.08), transparent 22rem),
+        radial-gradient(circle at 91% 82%, rgba(0,73,54,.055), transparent 26rem),
         repeating-linear-gradient(0deg, rgba(55,47,38,.018) 0, rgba(55,47,38,.018) 1px, transparent 1px, transparent 5px),
         var(--ground);
       font-family: "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
     }
     button, a { font: inherit; }
-    button:focus-visible, a:focus-visible { outline: 3px solid rgba(169,66,53,.55); outline-offset: 3px; }
+    button:focus-visible, a:focus-visible { outline: 3px solid rgba(0,73,54,.55); outline-offset: 3px; }
     .topbar {
       min-height: 74px;
       display: flex;
@@ -40,8 +42,8 @@
       gap: 18px;
       padding: 15px clamp(18px, 5vw, 74px);
       color: #fff9ea;
-      background: rgba(24,31,30,.97);
-      box-shadow: 0 7px 20px rgba(20,25,24,.16);
+      background: rgba(0,57,43,.98);
+      box-shadow: 0 7px 20px rgba(0,42,31,.2);
     }
     .brand {
       display: flex;
@@ -54,6 +56,7 @@
       letter-spacing: .075em;
     }
     .seal-dot { width: 13px; height: 13px; flex: 0 0 auto; border-radius: 50% 43% 54% 46%; background: var(--vermilion); box-shadow: 0 0 0 4px rgba(169,66,53,.16); }
+    .school-logo { width: 44px; height: 44px; flex: 0 0 auto; border: 1px solid rgba(255,255,255,.26); border-radius: 4px; object-fit: cover; background: var(--school-green); }
     .bar-note { margin: 0; color: rgba(255,249,234,.76); font-size: .85rem; letter-spacing: .08em; }
 
     main { width: min(1080px, calc(100% - 36px)); margin: 0 auto; padding: clamp(34px, 6vw, 62px) 0 76px; }
@@ -68,39 +71,43 @@
     .step { padding: clamp(27px, 5vw, 42px) clamp(28px, 7vw, 72px); border-bottom: 1px solid var(--line); }
     .step:last-child { border-bottom: 0; }
     .step-heading { display: flex; align-items: center; gap: 12px; margin: 0 0 21px; }
-    .step-count { display: grid; place-items: center; width: 28px; height: 28px; flex: 0 0 auto; border-radius: 50%; color: #fff9ea; background: var(--ink-soft); font-size: .83rem; font-weight: 800; }
-    .step-heading h2 { margin: 0; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: 1.16rem; font-weight: 600; letter-spacing: .13em; }
+    .step-count { display: grid; place-items: center; width: 28px; height: 28px; flex: 0 0 auto; border-radius: 50%; color: #fff9ea; background: var(--ink-soft); font-family: Georgia, "PMingLiU", serif; font-size: .9rem; font-weight: 600; }
+    .step-heading h2 { margin: 0; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: 1.26rem; font-weight: 600; letter-spacing: .13em; }
     .step-heading::after { height: 1px; flex: 1; content: ""; background: var(--line); }
-    .unit-tabs { display: flex; flex-wrap: wrap; gap: 10px; }
-    .unit-tab { padding: 10px 15px; border: 1px solid #cfc4b1; border-radius: 4px; color: #59605c; background: #fffdf7; cursor: pointer; transition: transform .16s var(--ease-out), color .16s var(--ease-out), border-color .16s var(--ease-out), background .16s var(--ease-out); }
+    .unit-tabs { display: flex; flex-wrap: wrap; gap: 12px; }
+    .unit-tab { position: relative; padding: 12px 17px 12px 28px; border: 1px solid #d8cfbe; border-radius: 0; color: #48534e; background: #fffdf7; cursor: pointer; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: 1.06rem; letter-spacing: .05em; transition: transform .16s var(--ease-out), color .16s var(--ease-out), border-color .16s var(--ease-out), background .16s var(--ease-out); }
+    .unit-tab::before { position: absolute; top: 9px; bottom: 9px; left: 12px; width: 1px; content: ""; background: rgba(0,73,54,.4); }
     .unit-tab:active, .lesson-card:active, .launch:active { transform: scale(.975); }
     .unit-tab:hover { border-color: #ae9276; }
-    .unit-tab.selected { border-color: var(--ink-soft); color: #fffdf7; background: var(--ink-soft); }
+    .unit-tab.selected { border-color: var(--school-green); color: #fffdf7; background: var(--school-green); }
+    .unit-tab.selected::before { background: rgba(245,214,106,.95); }
     .unit-tab[disabled] { cursor: default; opacity: .55; }
     .unit-tab[disabled]:hover { border-color: #cfc4b1; }
 
     .step-hint { margin: 0 0 18px; padding: 12px 14px; border-left: 3px solid var(--yellow); color: #48534e; background: #f6f1e6; font-size: .95rem; line-height: 1.65; }
     .lesson-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
-    .lesson-card { position: relative; min-height: 213px; display: flex; flex-direction: column; align-items: flex-start; padding: 24px 24px 24px 41px; overflow: hidden; border: 1px solid #d8cfbe; border-radius: 3px; color: var(--ink); background: repeating-linear-gradient(90deg, #fff 0, #fff 18px, rgba(91,77,48,.018) 19px), #fff; text-align: left; cursor: pointer; transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out), border-color .2s var(--ease-out), background .2s var(--ease-out); }
+    .lesson-card { position: relative; min-height: 213px; display: flex; flex-direction: column; align-items: flex-start; padding: 24px 24px 24px 41px; overflow: hidden; border: 1px solid #d8cfbe; border-radius: 0; color: var(--ink); background: repeating-linear-gradient(90deg, #fff 0, #fff 18px, rgba(91,77,48,.018) 19px), #fff; text-align: left; cursor: pointer; transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out), border-color .2s var(--ease-out), background .2s var(--ease-out); }
     .lesson-card::before { position: absolute; top: 23px; bottom: 23px; left: 19px; width: 1px; content: ""; background: linear-gradient(transparent, rgba(54,65,61,.46) 15px, rgba(54,65,61,.46) calc(100% - 15px), transparent); }
     .lesson-card:hover { border-color: #b8a36c; box-shadow: 0 13px 28px rgba(51,46,35,.12); transform: translateY(-3px); }
-    .lesson-card.selected { border-color: var(--vermilion); background: linear-gradient(135deg, rgba(245,214,106,.24), #fff 58%); box-shadow: 0 13px 28px rgba(169,66,53,.13); }
+    .lesson-card.selected { border-color: var(--school-green); background: linear-gradient(135deg, rgba(219,235,226,.76), #fff 58%); box-shadow: 0 13px 28px rgba(0,73,54,.14); }
     .lesson-card::after { position: absolute; top: 18px; right: 18px; width: 17px; height: 17px; content: ""; border: 1px solid #d5cbbb; border-radius: 50%; background: #fff; }
-    .lesson-card.selected::after { border: 5px solid var(--vermilion); }
+    .lesson-card.selected::after { border: 5px solid var(--school-green); }
     .card-index { margin: 0 0 18px; color: var(--vermilion); font-family: Georgia, serif; font-size: 1rem; letter-spacing: .08em; }
     .card-author { margin: 0; color: #69716c; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: .92rem; font-weight: 600; letter-spacing: .12em; }
     .lesson-card h3 { margin: 5px 0 7px; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 500; letter-spacing: .06em; line-height: 1.35; }
     .card-type { margin: 0; color: #67706a; font-size: .9rem; }
     .card-meta { display: flex; align-items: center; gap: 8px; margin-top: auto; padding: 5px 8px; color: #4a4539; background: linear-gradient(transparent 16%, rgba(245,214,106,.84) 16%, rgba(245,214,106,.84) 88%, transparent 88%); font-size: .86rem; font-weight: 800; }
     .card-meta::before { width: 7px; height: 7px; content: ""; border-radius: 50%; background: var(--vermilion); }
-    .future-index { display: grid; place-items: center; min-height: 213px; padding: 24px; border: 1px dashed #c9bea9; color: #8d877d; background: rgba(255,253,247,.55); text-align: center; }
-    .future-index strong { display: block; margin-bottom: 6px; color: #6d746e; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: 1.27rem; font-weight: 500; }
-    .future-index span { font-size: .88rem; }
+    .future-index { position: relative; display: grid; place-items: center; min-height: 213px; padding: 24px 24px 24px 41px; border: 1px solid #e2dacb; color: #8d877d; background: linear-gradient(135deg, rgba(246,241,230,.85), rgba(255,253,247,.7)); text-align: center; }
+    .future-index::before { position: absolute; top: 24px; bottom: 24px; left: 19px; width: 1px; content: ""; background: rgba(0,73,54,.18); }
+    .future-index strong { display: block; margin-bottom: 6px; color: #69726d; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: 1.27rem; font-weight: 500; }
+    .future-index span { display: inline-block; padding: 3px 6px; background: rgba(245,214,106,.36); font-size: .88rem; }
     .launch-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 24px; }
     .selection-note { margin: 0; color: #5e6661; font-size: .95rem; }
     .selection-note strong { color: var(--ink); }
-    .launch { padding: 13px 22px; border: 1px solid var(--ink-soft); border-radius: 4px; color: #fffdf7; background: var(--ink-soft); cursor: pointer; text-decoration: none; transition: transform .16s var(--ease-out), background .16s var(--ease-out), opacity .16s var(--ease-out); }
-    .launch:hover { background: #121917; }
+    .launch { position: relative; padding: 11px 3px 8px 19px; border: 0; border-bottom: 2px solid var(--school-green); border-radius: 0; color: var(--school-green); background: transparent; cursor: pointer; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: 1.06rem; font-weight: 600; letter-spacing: .06em; text-decoration: none; transition: transform .16s var(--ease-out), color .16s var(--ease-out), border-color .16s var(--ease-out), opacity .16s var(--ease-out); }
+    .launch::before { position: absolute; top: 14px; left: 2px; width: 8px; height: 8px; content: ""; border-radius: 50%; background: var(--vermilion); }
+    .launch:hover { border-color: var(--vermilion); color: var(--vermilion); }
     .launch[aria-disabled="true"] { cursor: not-allowed; opacity: .42; pointer-events: none; }
     .footnote { margin: 28px 0 0; color: #6f746f; font-size: .85rem; line-height: 1.7; text-align: center; }
     .footnote::before { display: inline-block; width: 7px; height: 7px; margin-right: 8px; content: ""; border-radius: 50%; background: var(--vermilion); vertical-align: middle; }
@@ -108,6 +115,7 @@
     @media (max-width: 700px) {
       .topbar { min-height: 64px; }
       .bar-note { display: none; }
+      .school-logo { width: 35px; height: 35px; }
       main { width: min(100% - 28px, 1080px); padding-top: 38px; }
       .intro { padding-left: 23px; }
       .lesson-grid { grid-template-columns: 1fr; }
@@ -119,7 +127,7 @@
 </head>
 <body>
   <header class="topbar">
-    <div class="brand"><span class="seal-dot" aria-hidden="true"></span><span>指定篇章文言字詞互動練習</span></div>
+    <div class="brand"><img class="school-logo" src="/manus-storage/school-logo_6402c49c.jpeg" alt="羅桂祥中學中文科" /><span class="seal-dot" aria-hidden="true"></span><span>指定篇章文言字詞互動練習</span></div>
     <p class="bar-note">篇章索引</p>
   </header>
 
