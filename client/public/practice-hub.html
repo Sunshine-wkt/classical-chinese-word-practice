@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>指定篇章文言字詞互動練習</title>
+  <title>中文科DSE指定篇章文言字詞互動練習</title>
   <style>
     /* 設計：羅桂祥中學中文科墨卷課堂——校徽墨綠頂欄、暖紙空間、硃砂索引與紙本練習卡。 */
     :root {
@@ -52,9 +52,11 @@
       min-width: 0;
       color: #fff9ea;
       font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif;
-      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
-      letter-spacing: .075em;
+      font-size: clamp(.95rem, 1.8vw, 1.26rem);
+      letter-spacing: .055em;
+      line-height: 1.28;
     }
+    .brand-title { min-width: 0; }
     .seal-dot { width: 13px; height: 13px; flex: 0 0 auto; border-radius: 50% 43% 54% 46%; background: var(--vermilion); box-shadow: 0 0 0 4px rgba(169,66,53,.16); }
     .school-logo { width: 44px; height: 44px; flex: 0 0 auto; border: 1px solid rgba(255,255,255,.26); border-radius: 4px; object-fit: cover; background: var(--school-green); }
     .bar-note { margin: 0; color: rgba(255,249,234,.76); font-size: .85rem; letter-spacing: .08em; }
@@ -117,6 +119,7 @@
       .topbar { min-height: 64px; }
       .bar-note { display: none; }
       .school-logo { width: 35px; height: 35px; }
+      .brand { gap: 9px; font-size: .96rem; letter-spacing: .035em; }
       main { width: min(100% - 28px, 1080px); padding-top: 38px; }
       .intro { padding-left: 23px; }
       .lesson-grid { grid-template-columns: 1fr; }
@@ -128,7 +131,7 @@
 </head>
 <body>
   <header class="topbar">
-    <div class="brand"><img class="school-logo" src="/manus-storage/school-logo_6402c49c.jpeg" alt="羅桂祥中學中文科" /><span class="seal-dot" aria-hidden="true"></span><span>指定篇章文言字詞互動練習</span></div>
+    <div class="brand"><img class="school-logo" src="/manus-storage/school-logo_6402c49c.jpeg" alt="羅桂祥中學中文科" /><span class="seal-dot" aria-hidden="true"></span><span class="brand-title">中文科DSE指定篇章文言字詞互動練習</span></div>
     <p class="bar-note">篇章索引</p>
   </header>
 
