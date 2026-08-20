@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>文言文互動練習｜篇章索引</title>
+  <title>指定篇章文言字詞互動練習</title>
   <style>
     /* 設計：墨卷課堂的入口延展——深墨頂欄、暖紙空間、硃砂索引與紙本練習卡。 */
     :root {
@@ -56,7 +56,7 @@
     .seal-dot { width: 13px; height: 13px; flex: 0 0 auto; border-radius: 50% 43% 54% 46%; background: var(--vermilion); box-shadow: 0 0 0 4px rgba(169,66,53,.16); }
     .bar-note { margin: 0; color: rgba(255,249,234,.76); font-size: .85rem; letter-spacing: .08em; }
 
-    main { width: min(1080px, calc(100% - 36px)); margin: 0 auto; padding: clamp(42px, 8vw, 85px) 0 76px; }
+    main { width: min(1080px, calc(100% - 36px)); margin: 0 auto; padding: clamp(34px, 6vw, 62px) 0 76px; }
     .intro { position: relative; padding: 0 0 38px 32px; }
     .intro::before { position: absolute; top: 8px; bottom: 38px; left: 3px; width: 2px; content: ""; background: linear-gradient(var(--vermilion), rgba(169,66,53,.18)); }
     .eyebrow { margin: 0 0 11px; color: var(--vermilion); font-size: .83rem; font-weight: 800; letter-spacing: .18em; }
@@ -69,7 +69,7 @@
     .step:last-child { border-bottom: 0; }
     .step-heading { display: flex; align-items: center; gap: 12px; margin: 0 0 21px; }
     .step-count { display: grid; place-items: center; width: 28px; height: 28px; flex: 0 0 auto; border-radius: 50%; color: #fff9ea; background: var(--ink-soft); font-size: .83rem; font-weight: 800; }
-    .step-heading h2 { margin: 0; font-size: .92rem; font-weight: 800; letter-spacing: .13em; }
+    .step-heading h2 { margin: 0; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: 1.16rem; font-weight: 600; letter-spacing: .13em; }
     .step-heading::after { height: 1px; flex: 1; content: ""; background: var(--line); }
     .unit-tabs { display: flex; flex-wrap: wrap; gap: 10px; }
     .unit-tab { padding: 10px 15px; border: 1px solid #cfc4b1; border-radius: 4px; color: #59605c; background: #fffdf7; cursor: pointer; transition: transform .16s var(--ease-out), color .16s var(--ease-out), border-color .16s var(--ease-out), background .16s var(--ease-out); }
@@ -81,17 +81,18 @@
 
     .step-hint { margin: 0 0 18px; padding: 12px 14px; border-left: 3px solid var(--yellow); color: #48534e; background: #f6f1e6; font-size: .95rem; line-height: 1.65; }
     .lesson-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
-    .lesson-card { position: relative; min-height: 213px; display: flex; flex-direction: column; align-items: flex-start; padding: 24px; overflow: hidden; border: 1px solid #d8cfbe; border-radius: 3px; color: var(--ink); background: #fff; text-align: left; cursor: pointer; transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out), border-color .2s var(--ease-out), background .2s var(--ease-out); }
+    .lesson-card { position: relative; min-height: 213px; display: flex; flex-direction: column; align-items: flex-start; padding: 24px 24px 24px 41px; overflow: hidden; border: 1px solid #d8cfbe; border-radius: 3px; color: var(--ink); background: repeating-linear-gradient(90deg, #fff 0, #fff 18px, rgba(91,77,48,.018) 19px), #fff; text-align: left; cursor: pointer; transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out), border-color .2s var(--ease-out), background .2s var(--ease-out); }
+    .lesson-card::before { position: absolute; top: 23px; bottom: 23px; left: 19px; width: 1px; content: ""; background: linear-gradient(transparent, rgba(54,65,61,.46) 15px, rgba(54,65,61,.46) calc(100% - 15px), transparent); }
     .lesson-card:hover { border-color: #b8a36c; box-shadow: 0 13px 28px rgba(51,46,35,.12); transform: translateY(-3px); }
-    .lesson-card.selected { border-color: var(--green); background: linear-gradient(135deg, rgba(220,235,228,.62), #fff 58%); box-shadow: 0 13px 28px rgba(48,117,101,.14); }
+    .lesson-card.selected { border-color: var(--vermilion); background: linear-gradient(135deg, rgba(245,214,106,.24), #fff 58%); box-shadow: 0 13px 28px rgba(169,66,53,.13); }
     .lesson-card::after { position: absolute; top: 18px; right: 18px; width: 17px; height: 17px; content: ""; border: 1px solid #d5cbbb; border-radius: 50%; background: #fff; }
-    .lesson-card.selected::after { border: 5px solid var(--green); }
+    .lesson-card.selected::after { border: 5px solid var(--vermilion); }
     .card-index { margin: 0 0 18px; color: var(--vermilion); font-family: Georgia, serif; font-size: 1rem; letter-spacing: .08em; }
-    .card-author { margin: 0; color: #69716c; font-size: .8rem; font-weight: 800; letter-spacing: .12em; }
+    .card-author { margin: 0; color: #69716c; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: .92rem; font-weight: 600; letter-spacing: .12em; }
     .lesson-card h3 { margin: 5px 0 7px; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 500; letter-spacing: .06em; line-height: 1.35; }
     .card-type { margin: 0; color: #67706a; font-size: .9rem; }
-    .card-meta { display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 20px; color: #245a4e; font-size: .86rem; font-weight: 800; }
-    .card-meta::before { width: 7px; height: 7px; content: ""; border-radius: 50%; background: var(--green); }
+    .card-meta { display: flex; align-items: center; gap: 8px; margin-top: auto; padding: 5px 8px; color: #4a4539; background: linear-gradient(transparent 16%, rgba(245,214,106,.84) 16%, rgba(245,214,106,.84) 88%, transparent 88%); font-size: .86rem; font-weight: 800; }
+    .card-meta::before { width: 7px; height: 7px; content: ""; border-radius: 50%; background: var(--vermilion); }
     .future-index { display: grid; place-items: center; min-height: 213px; padding: 24px; border: 1px dashed #c9bea9; color: #8d877d; background: rgba(255,253,247,.55); text-align: center; }
     .future-index strong { display: block; margin-bottom: 6px; color: #6d746e; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: 1.27rem; font-weight: 500; }
     .future-index span { font-size: .88rem; }
@@ -118,22 +119,16 @@
 </head>
 <body>
   <header class="topbar">
-    <div class="brand"><span class="seal-dot" aria-hidden="true"></span><span>文言文互動練習</span></div>
+    <div class="brand"><span class="seal-dot" aria-hidden="true"></span><span>指定篇章文言字詞互動練習</span></div>
     <p class="bar-note">篇章索引</p>
   </header>
 
   <main>
-    <section class="intro" aria-labelledby="page-title">
-      <p class="eyebrow">在語境中辨義</p>
-      <h1 id="page-title">篇章練習索引</h1>
-      <p>按單元選擇篇章，再開啟互動詞解練習。每項練習均以原文為本，適合課堂投影、即場討論和教師講解。</p>
-    </section>
-
     <section class="panel" aria-label="互動練習選擇器">
       <div class="step">
-        <div class="step-heading"><span class="step-count">1</span><h2>選擇單元</h2></div>
+        <div class="step-heading"><span class="step-count">1</span><h2>指定文言篇章</h2></div>
         <div class="unit-tabs" role="tablist" aria-label="篇章群組">
-          <button class="unit-tab selected" type="button" role="tab" aria-selected="true">論語選篇</button>
+          <button class="unit-tab selected" type="button" role="tab" aria-selected="true">《論仁論孝論君子》</button>
           <button class="unit-tab" type="button" role="tab" aria-selected="false" disabled>更多篇章・日後加入</button>
         </div>
       </div>
@@ -147,7 +142,7 @@
             <p class="card-author">孔子</p>
             <h3>《論仁、論孝、論君子》</h3>
             <p class="card-type">原文詞解・四選一辨義</p>
-            <p class="card-meta">30 個重點詞語</p>
+            <p class="card-meta">可開始・30 個重點詞語</p>
           </button>
           <div class="future-index" aria-label="預留的新增練習位置">
             <div><strong>下一篇章，待加入</strong><span>新增練習後會在此顯示</span></div>
