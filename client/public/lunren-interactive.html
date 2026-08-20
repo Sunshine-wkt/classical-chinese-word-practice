@@ -396,7 +396,7 @@
       .source { font-size: .8rem; }
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
-  </style>
+  /* 墨卷課堂導航：返回目錄沿用頂欄控制的紙本份量與配色。 */.return-link{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;}</style>
 </head>
 <body>
   <header class="topbar">
@@ -406,7 +406,7 @@
         <span class="progress-label" id="progress-label">首次答對 0 / 30　｜　已完成 0 / 30</span>
         <div class="progress-rail" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
       </div>
-      <button class="reset-btn" type="button" id="reset-btn">重設進度</button>
+      <button class="reset-btn" type="button" id="reset-btn">重設進度</button><a class="reset-btn return-link" href="practice-hub.html">返回目錄</a>
     </div>
   </header>
 
