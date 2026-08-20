@@ -77,23 +77,17 @@
     .step-heading h2 { margin: 0; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: 1.26rem; font-weight: 600; letter-spacing: .13em; }
     .step-heading::after { height: 1px; flex: 1; content: ""; background: var(--line); }
     .unit-tabs { display: flex; flex-wrap: wrap; gap: 12px; }
-    .unit-tab { position: relative; padding: 12px 17px 12px 28px; border: 1px solid #d8cfbe; border-radius: 0; color: #48534e; background: #fffdf7; cursor: pointer; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: 1.06rem; letter-spacing: .05em; transition: transform .16s var(--ease-out), color .16s var(--ease-out), border-color .16s var(--ease-out), background .16s var(--ease-out); }
+    .unit-tab { position: relative; padding: 12px 17px 12px 28px; border: 1px solid #d8cfbe; border-radius: 0; color: #48534e; background: #fffdf7; cursor: pointer; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: 1.06rem; letter-spacing: .05em; text-decoration: none; transition: transform .16s var(--ease-out), color .16s var(--ease-out), border-color .16s var(--ease-out), background .16s var(--ease-out); }
     .unit-tab::before { position: absolute; top: 9px; bottom: 9px; left: 12px; width: 1px; content: ""; background: rgba(0,73,54,.4); }
     .unit-tab:active, .lesson-card:active, .launch:active { transform: scale(.975); }
     .unit-tab:hover { border-color: #ae9276; }
-    .unit-tab.selected { border-color: var(--school-green); color: #fffdf7; background: var(--school-green); }
-    .unit-tab.selected::before { background: rgba(245,214,106,.95); }
-    .unit-tab[disabled] { cursor: default; opacity: .55; }
-    .unit-tab[disabled]:hover { border-color: #cfc4b1; }
 
     .step-hint { margin: 0 0 18px; padding: 12px 14px; border-left: 3px solid var(--yellow); color: #48534e; background: #f6f1e6; font-size: .95rem; line-height: 1.65; }
     .lesson-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px 24px; }
-    .lesson-card { position: relative; min-height: 223px; display: flex; flex-direction: column; align-items: flex-start; padding: 24px 28px 24px 47px; overflow: hidden; border: 0; border-top: 1px solid #d8cfbe; border-bottom: 1px solid #d8cfbe; border-radius: 0; color: #202926; background: linear-gradient(90deg, rgba(0,73,54,.04), transparent 8%), repeating-linear-gradient(90deg, #fff 0, #fff 18px, rgba(91,77,48,.018) 19px), #fff; text-align: left; cursor: pointer; transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out), border-color .2s var(--ease-out), background .2s var(--ease-out); }
+    .lesson-card { position: relative; min-height: 223px; display: flex; flex-direction: column; align-items: flex-start; padding: 24px 28px 24px 47px; overflow: hidden; border: 0; border-top: 1px solid #d8cfbe; border-bottom: 1px solid #d8cfbe; border-radius: 0; color: #202926; background: linear-gradient(90deg, rgba(0,73,54,.04), transparent 8%), repeating-linear-gradient(90deg, #fff 0, #fff 18px, rgba(91,77,48,.018) 19px), #fff; text-align: left; cursor: pointer; text-decoration: none; transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out), border-color .2s var(--ease-out), background .2s var(--ease-out); }
     .lesson-card::before { position: absolute; top: 18px; bottom: 18px; left: 20px; width: 2px; content: ""; background: linear-gradient(transparent, var(--school-green) 15px, var(--school-green) calc(100% - 15px), transparent); }
     .lesson-card:hover { border-color: #b8a36c; box-shadow: none; transform: translateY(-2px); }
-    .lesson-card.selected { border-color: var(--school-green); background: linear-gradient(135deg, rgba(219,235,226,.76), #fff 58%); box-shadow: 0 13px 28px rgba(0,73,54,.14); }
     .lesson-card::after { position: absolute; top: 20px; right: 20px; width: 24px; height: 2px; content: ""; background: var(--vermilion); }
-    .lesson-card.selected::after { width: 34px; background: var(--yellow); }
     .card-index { position: relative; margin: 0 0 18px; color: var(--vermilion); font-family: Georgia, serif; font-size: 1rem; letter-spacing: .08em; }
     .card-index::before { display: inline-block; width: 6px; height: 6px; margin: 0 8px 1px 0; content: ""; border-radius: 50%; background: var(--vermilion); vertical-align: middle; }
     .card-author { margin: 0; color: #69716c; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: .92rem; font-weight: 600; letter-spacing: .12em; }
@@ -101,17 +95,6 @@
     .card-type { margin: 0; color: #67706a; font-size: .9rem; }
     .card-meta { display: flex; align-items: center; gap: 8px; margin-top: auto; padding: 5px 8px; color: #4a4539; background: linear-gradient(transparent 16%, rgba(245,214,106,.84) 16%, rgba(245,214,106,.84) 88%, transparent 88%); font-size: .86rem; font-weight: 800; }
     .card-meta::before { width: 7px; height: 7px; content: ""; border-radius: 50%; background: var(--vermilion); }
-    .future-index { position: relative; display: grid; place-items: center start; min-height: 132px; padding: 22px 28px 22px 47px; border: 0; border-top: 1px solid #e2dacb; border-bottom: 1px solid #e2dacb; color: #8d877d; background: linear-gradient(90deg, rgba(246,241,230,.95), rgba(255,253,247,.45)); text-align:left; }
-    .future-index::before { position: absolute; top: 18px; bottom: 18px; left: 20px; width: 2px; content: ""; background: rgba(0,73,54,.24); }
-    .future-index strong { display: block; margin-bottom: 6px; color: #69726d; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: 1.27rem; font-weight: 500; }
-    .future-index span { display: inline-block; padding: 3px 6px; background: rgba(245,214,106,.36); font-size: .88rem; }
-    .launch-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 24px; }
-    .selection-note { margin: 0; color: #5e6661; font-size: .95rem; }
-    .selection-note strong { color: var(--ink); }
-    .launch { position: relative; padding: 11px 3px 8px 19px; border: 0; border-bottom: 2px solid var(--school-green); border-radius: 0; color: var(--school-green); background: transparent; cursor: pointer; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: 1.06rem; font-weight: 600; letter-spacing: .06em; text-decoration: none; transition: transform .16s var(--ease-out), color .16s var(--ease-out), border-color .16s var(--ease-out), opacity .16s var(--ease-out); }
-    .launch::before { position: absolute; top: 14px; left: 2px; width: 8px; height: 8px; content: ""; border-radius: 50%; background: var(--vermilion); }
-    .launch:hover { border-color: var(--vermilion); color: var(--vermilion); }
-    .launch[aria-disabled="true"] { cursor: not-allowed; opacity: .42; pointer-events: none; }
     .footnote { margin: 28px 0 0; color: #6f746f; font-size: .85rem; line-height: 1.7; text-align: center; }
     .footnote::before { display: inline-block; width: 7px; height: 7px; margin-right: 8px; content: ""; border-radius: 50%; background: var(--vermilion); vertical-align: middle; }
 
@@ -123,8 +106,6 @@
       main { width: min(100% - 28px, 1080px); padding-top: 38px; }
       .intro { padding-left: 23px; }
       .lesson-grid { grid-template-columns: 1fr; }
-      .launch-row { align-items: stretch; flex-direction: column; }
-      .launch { text-align: center; }
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
   </style>
@@ -139,46 +120,38 @@
     <section class="panel" aria-label="互動練習選擇器">
       <div class="step">
         <div class="step-heading"><span class="step-count">1</span><h2>指定文言篇章</h2></div>
-        <div class="unit-tabs" role="tablist" aria-label="篇章群組">
-          <button class="unit-tab selected" type="button" role="tab" aria-selected="true" data-exercise="lunren">《論仁論孝論君子》</button>
-          <button class="unit-tab" type="button" role="tab" aria-selected="false" data-exercise="yueyang">《岳陽樓記》</button>
-          <button class="unit-tab" type="button" role="tab" aria-selected="false" data-exercise="limpo">《廉頗藺相如列傳》</button>
-          <button class="unit-tab" type="button" role="tab" aria-selected="false" disabled>待加入篇章</button>
+        <div class="unit-tabs" aria-label="篇章群組">
+          <a class="unit-tab" href="lunren-interactive.html">《論仁論孝論君子》</a>
+          <a class="unit-tab" href="yueyang-interactive.html">《岳陽樓記》</a>
+          <a class="unit-tab" href="limpo-interactive.html">《廉頗藺相如列傳》</a>
         </div>
       </div>
 
       <div class="step">
         <div class="step-heading"><span class="step-count">2</span><h2>選擇練習</h2></div>
-        <p class="step-hint">先點選篇章，再開啟練習。詞語題目只依據對應篇章筆記中的重點詞解編製。</p>
+        <p class="step-hint">點選篇章即可直接開啟練習。詞語題目只依據對應篇章筆記中的重點詞解編製。</p>
         <div class="lesson-grid">
-          <button class="lesson-card" type="button" data-exercise="lunren" data-href="lunren-interactive.html" data-title="孔子《論仁、論孝、論君子》" aria-pressed="false">
+          <a class="lesson-card" href="lunren-interactive.html" aria-label="開啟孔子《論仁、論孝、論君子》互動練習">
             <p class="card-index">01</p>
             <p class="card-author">孔子</p>
             <h3>《論仁、論孝、論君子》</h3>
             <p class="card-type">原文詞解・四選一辨義</p>
             <p class="card-meta">可開始辨義・30 個重點詞語</p>
-          </button>
-          <button class="lesson-card" type="button" data-exercise="yueyang" data-href="yueyang-interactive.html" data-title="范仲淹《岳陽樓記》" aria-pressed="false">
+          </a>
+          <a class="lesson-card" href="yueyang-interactive.html" aria-label="開啟范仲淹《岳陽樓記》互動練習">
             <p class="card-index">02</p>
             <p class="card-author">范仲淹</p>
             <h3>《岳陽樓記》</h3>
             <p class="card-type">原文詞解・四選一辨義</p>
             <p class="card-meta">可開始辨義・46 個重點詞語</p>
-          </button>
-          <button class="lesson-card" type="button" data-exercise="limpo" data-href="limpo-interactive.html" data-title="司馬遷《廉頗藺相如列傳》" aria-pressed="false">
+          </a>
+          <a class="lesson-card" href="limpo-interactive.html" aria-label="開啟司馬遷《廉頗藺相如列傳》互動練習">
             <p class="card-index">03</p>
             <p class="card-author">司馬遷</p>
             <h3>《廉頗藺相如列傳》</h3>
             <p class="card-type">原文詞解・四選一辨義</p>
             <p class="card-meta">可開始辨義・55 個重點詞語</p>
-          </button>
-          <div class="future-index" aria-label="預留的新增練習位置">
-            <div><strong>待加入篇章</strong><span>備註：新增練習後列於此處</span></div>
-          </div>
-        </div>
-        <div class="launch-row">
-          <p class="selection-note" id="selection-note">尚未選擇篇章</p>
-          <a class="launch" id="launch" href="#" aria-disabled="true">開啟已選練習</a>
+          </a>
         </div>
       </div>
     </section>
@@ -186,30 +159,5 @@
     <p class="footnote">本入口只作課堂導覽，不記錄、儲存或傳送學生作答資料。</p>
   </main>
 
-  <script>
-    const cards = [...document.querySelectorAll('.lesson-card')];
-    const unitTabs = [...document.querySelectorAll('.unit-tab[data-exercise]')];
-    const launch = document.getElementById('launch');
-    const selectionNote = document.getElementById('selection-note');
-
-    function selectCard(card) {
-      cards.forEach(item => {
-        const selected = item === card;
-        item.classList.toggle('selected', selected);
-        item.setAttribute('aria-pressed', String(selected));
-      });
-      unitTabs.forEach(tab => {
-        const selected = tab.dataset.exercise === card.dataset.exercise;
-        tab.classList.toggle('selected', selected);
-        tab.setAttribute('aria-selected', String(selected));
-      });
-      launch.href = card.dataset.href;
-      launch.setAttribute('aria-disabled', 'false');
-      selectionNote.innerHTML = `已選：<strong>${card.dataset.title}</strong>`;
-    }
-
-    cards.forEach(card => card.addEventListener('click', () => selectCard(card)));
-    unitTabs.forEach(tab => tab.addEventListener('click', () => selectCard(cards.find(card => card.dataset.exercise === tab.dataset.exercise))));
-  </script>
 </body>
 </html>
