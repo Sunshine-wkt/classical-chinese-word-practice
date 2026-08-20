@@ -3,7 +3,7 @@ import { useEffect } from "react";
 /** 設計：墨卷課堂——根路徑先進入篇章練習索引；使用相對路徑兼容 GitHub Pages 子目錄。 */
 export default function Home() {
   useEffect(() => {
-    window.location.replace("practice-hub.html");
+    window.location.replace(new URL("practice-hub.html", window.location.href).href);
   }, []);
 
   return (
