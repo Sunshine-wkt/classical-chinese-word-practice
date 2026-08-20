@@ -275,6 +275,9 @@
       font-weight: 500;
     }
     .unlock-panel p { margin: 0; color: #3e4f49; }
+    .score-summary { display: flex; align-items: baseline; gap: 10px; margin: 19px 0 11px; }
+    .score-summary span { color: #245a4e; font-size: .88rem; font-weight: 800; letter-spacing: .1em; }
+    .score-summary strong { color: var(--green); font-family: Georgia, "PMingLiU", serif; font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 500; }
     .summary-grid {
       display: flex;
       flex-wrap: wrap;
@@ -362,7 +365,7 @@
     .feedback dl { margin: 15px 0 0; }
     .feedback dt { margin-top: 12px; color: #626b65; font-size: .82rem; font-weight: 800; letter-spacing: .09em; }
     .feedback dd { margin: 2px 0 0; color: #202925; line-height: 1.72; }
-    .retry-instruction { margin: 13px 0 0; color: #70463d; font-size: .96rem; font-weight: 700; }
+    .attempt-count { margin: 0 0 15px; color: #68716c; font-size: .9rem; font-weight: 700; letter-spacing: .06em; }
     .completed-note { margin: 0 0 5px; color: var(--complete); font-weight: 800; }
 
     @media (max-width: 680px) {
@@ -385,7 +388,7 @@
     <div class="work-title"><span class="seal-dot" aria-hidden="true"></span><span>孔子《論仁、論孝、論君子》</span></div>
     <div class="header-actions">
       <div class="progress-wrap" aria-live="polite">
-        <span class="progress-label" id="progress-label">得分 0 / 30　｜　已完成 0 / 30</span>
+        <span class="progress-label" id="progress-label">首次答對 0 / 30　｜　已完成 0 / 30</span>
         <div class="progress-rail" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
       </div>
       <button class="reset-btn" type="button" id="reset-btn">重設進度</button>
@@ -538,9 +541,10 @@
         </section>
 
         <section class="unlock-panel" id="unlock-panel" hidden aria-live="polite">
-          <p class="unlock-kicker">30 / 30 詞語已完成</p>
-          <h2>全文語譯已解鎖</h2>
-          <p>原始資料未提供全文語譯。本頁保留原文閱讀，並整理本課已完成的重點詞語如下。</p>
+          <p class="unlock-kicker">所有詞語已完成</p>
+          <h2>本課總分摘要</h2>
+          <div class="score-summary"><span>首次答對總分</span><strong id="final-score">0 / 30</strong></div>
+          <p id="summary-note">以下為本課已完成的重點詞語。</p>
           <div class="summary-grid" id="summary-grid"></div>
         </section>
       </div>
@@ -596,6 +600,8 @@
     ];
 
     const completed = new Set();
+    const firstTryCorrect = new Set();
+    const attemptsByTerm = new Map();
     let activeTerm = null;
     let previousFocus = null;
     const letters = ['A', 'B', 'C', 'D'];
@@ -609,8 +615,8 @@
     function updateProgress() {
       const count = completed.size;
       const total = terms.length;
-      const score = count;
-      document.getElementById('progress-label').textContent = `得分 ${score} / ${total}　｜　已完成 ${count} / ${total}`;
+      const score = firstTryCorrect.size;
+      document.getElementById('progress-label').textContent = `首次答對 ${score} / ${total}　｜　已完成 ${count} / ${total}`;
       document.getElementById('progress-fill').style.width = `${(count / total) * 100}%`;
       document.querySelectorAll('.term').forEach(button => {
         const isComplete = completed.has(button.dataset.term);
@@ -620,7 +626,10 @@
       const panel = document.getElementById('unlock-panel');
       if (count === total) {
         panel.hidden = false;
-        panel.querySelector('.unlock-kicker').textContent = `得分 ${score} / ${total}　｜　${count} / ${total} 詞語已完成`;
+        const totalAttempts = [...attemptsByTerm.values()].reduce((sum, value) => sum + value, 0);
+        panel.querySelector('.unlock-kicker').textContent = `${count} / ${total} 詞語已完成`;
+        document.getElementById('final-score').textContent = `${score} / ${total}`;
+        document.getElementById('summary-note').textContent = `共作答 ${totalAttempts} 次；首次答對 ${score} 題，補答完成 ${count - score} 題。`;
         document.getElementById('summary-grid').innerHTML = terms.map(term => `<span class="summary-tag">${term.word}：${term.explanation.replace('「', '').replace('」', '')}</span>`).join('');
       } else {
         panel.hidden = true;
@@ -638,13 +647,15 @@
       return ordered;
     }
 
-    function showFeedback(term, selectedIndex, alreadyCompleted) {
-      const correct = selectedIndex === term.answer;
+    function showCompletion(term, alreadyCompleted) {
+      const attempts = attemptsByTerm.get(term.id) || 0;
+      const firstTry = firstTryCorrect.has(term.id);
       const answerPosition = optionOrder(term).indexOf(term.answer);
-      const status = alreadyCompleted ? '已完成' : (correct ? '正確' : '未正確');
+      const status = firstTry ? '首次答對・獲得 1 分' : '完成題目・本題得分 0';
       modalContent.innerHTML = `
         ${alreadyCompleted ? '<p class="completed-note">此詞語已完成，可重閱以下校注。</p>' : ''}
-        <section class="feedback ${alreadyCompleted || correct ? 'correct' : 'incorrect'}">
+        <p class="attempt-count">本題嘗試：${attempts} 次</p>
+        <section class="feedback correct">
           <p class="feedback-status">${status}</p>
           <dl>
             <dt>正確答案</dt><dd>${letters[answerPosition]}. ${term.options[term.answer]}</dd>
@@ -654,35 +665,28 @@
         </section>`;
     }
 
-    function renderQuestion(term, incorrectSelection = null) {
-      const answerPosition = optionOrder(term).indexOf(term.answer);
-      const retryFeedback = incorrectSelection === null ? '' : `
-        <section class="feedback incorrect">
-          <p class="feedback-status">未正確</p>
-          <dl>
-            <dt>正確答案</dt><dd>${letters[answerPosition]}. ${term.options[term.answer]}</dd>
-            <dt>詞義解釋</dt><dd>${term.explanation}</dd>
-            <dt>原句意思</dt><dd>${term.translation}</dd>
-          </dl>
-          <p class="retry-instruction">請直接選取正確答案，才會取得 1 分並完成此詞。</p>
-        </section>`;
+    function renderQuestion(term) {
+      const attempts = attemptsByTerm.get(term.id) || 0;
       modalContent.innerHTML = `
         <p class="question">${term.question}</p>
-        ${retryFeedback}
+        <p class="attempt-count">本題嘗試：${attempts} 次</p>
         <div class="options">${optionOrder(term).map((optionIndex, index) => `
-          <button class="option-btn ${incorrectSelection !== null && optionIndex !== term.answer ? 'locked' : ''} ${incorrectSelection !== null && optionIndex === term.answer ? 'answer-target' : ''}" type="button" data-option="${optionIndex}" ${incorrectSelection !== null && optionIndex !== term.answer ? 'disabled' : ''}>
+          <button class="option-btn" type="button" data-option="${optionIndex}">
             <span class="option-key">${letters[index]}</span><span>${term.options[optionIndex]}</span>
           </button>`).join('')}
         </div>`;
       modalContent.querySelectorAll('[data-option]').forEach(button => {
         button.addEventListener('click', () => {
           const selectedIndex = Number(button.dataset.option);
+          const attempts = (attemptsByTerm.get(term.id) || 0) + 1;
+          attemptsByTerm.set(term.id, attempts);
           if (selectedIndex === term.answer) {
             completed.add(term.id);
+            if (attempts === 1) firstTryCorrect.add(term.id);
             updateProgress();
-            showFeedback(term, selectedIndex, false);
+            showCompletion(term, false);
           } else {
-            renderQuestion(term, selectedIndex);
+            renderQuestion(term);
           }
         });
       });
@@ -696,7 +700,7 @@
       modalTitle.textContent = term.word;
       modalContext.textContent = `原句：${term.sentence}`;
       if (completed.has(termId)) {
-        showFeedback(term, term.answer, true);
+        showCompletion(term, true);
       } else {
         renderQuestion(term);
       }
@@ -721,6 +725,8 @@
     document.getElementById('reset-btn').addEventListener('click', () => {
       if (completed.size === 0 || window.confirm('確定要重設本課的完成進度嗎？')) {
         completed.clear();
+        firstTryCorrect.clear();
+        attemptsByTerm.clear();
         updateProgress();
         if (activeTerm) closeModal();
       }
