@@ -41,6 +41,8 @@ jobs:
 
       - name: 設定 GitHub Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: 上載靜態網站
         uses: actions/upload-pages-artifact@v3
