@@ -79,7 +79,7 @@
     .unit-tabs { display: flex; flex-wrap: wrap; gap: 12px; }
     .unit-tab { position: relative; padding: 12px 17px 12px 28px; border: 1px solid #d8cfbe; border-radius: 0; color: #48534e; background: #fffdf7; cursor: pointer; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: 1.06rem; letter-spacing: .05em; text-decoration: none; transition: transform .16s var(--ease-out), color .16s var(--ease-out), border-color .16s var(--ease-out), background .16s var(--ease-out); }
     .unit-tab::before { position: absolute; top: 9px; bottom: 9px; left: 12px; width: 1px; content: ""; background: rgba(0,73,54,.4); }
-    .unit-tab:active, .lesson-card:active, .launch:active { transform: scale(.975); }
+    .unit-tab:active, .lesson-card:active { transform: scale(.975); }
     .unit-tab:hover { border-color: #ae9276; }
 
     .step-hint { margin: 0 0 18px; padding: 12px 14px; border-left: 3px solid var(--yellow); color: #48534e; background: #f6f1e6; font-size: .95rem; line-height: 1.65; }
@@ -95,9 +95,6 @@
     .card-type { margin: 0; color: #67706a; font-size: .9rem; }
     .card-meta { display: flex; align-items: center; gap: 8px; margin-top: auto; padding: 5px 8px; color: #4a4539; background: linear-gradient(transparent 16%, rgba(245,214,106,.84) 16%, rgba(245,214,106,.84) 88%, transparent 88%); font-size: .86rem; font-weight: 800; }
     .card-meta::before { width: 7px; height: 7px; content: ""; border-radius: 50%; background: var(--vermilion); }
-    .footnote { margin: 28px 0 0; color: #6f746f; font-size: .85rem; line-height: 1.7; text-align: center; }
-    .footnote::before { display: inline-block; width: 7px; height: 7px; margin-right: 8px; content: ""; border-radius: 50%; background: var(--vermilion); vertical-align: middle; }
-
     @media (max-width: 700px) {
       .topbar { min-height: 64px; }
       .bar-note { display: none; }
@@ -135,28 +132,27 @@
             <p class="card-index">01</p>
             <p class="card-author">孔子</p>
             <h3>《論仁、論孝、論君子》</h3>
-            <p class="card-type">原文詞解・四選一辨義</p>
-            <p class="card-meta">可開始辨義・30 個重點詞語</p>
+            <p class="card-type">原文詞解</p>
+            <p class="card-meta">30 個重點詞語</p>
           </a>
           <a class="lesson-card" href="yueyang-interactive.html" aria-label="開啟范仲淹《岳陽樓記》互動練習">
             <p class="card-index">02</p>
             <p class="card-author">范仲淹</p>
             <h3>《岳陽樓記》</h3>
-            <p class="card-type">原文詞解・四選一辨義</p>
-            <p class="card-meta">可開始辨義・46 個重點詞語</p>
+            <p class="card-type">原文詞解</p>
+            <p class="card-meta">46 個重點詞語</p>
           </a>
           <a class="lesson-card" href="limpo-interactive.html" aria-label="開啟司馬遷《廉頗藺相如列傳》互動練習">
             <p class="card-index">03</p>
             <p class="card-author">司馬遷</p>
             <h3>《廉頗藺相如列傳》</h3>
-            <p class="card-type">原文詞解・四選一辨義</p>
-            <p class="card-meta">可開始辨義・55 個重點詞語</p>
+            <p class="card-type">原文詞解</p>
+            <p class="card-meta">55 個重點詞語</p>
           </a>
         </div>
       </div>
     </section>
 
-    <p class="footnote">本入口只作課堂導覽，不記錄、儲存或傳送學生作答資料。</p>
   </main>
 
 </body>
