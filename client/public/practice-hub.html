@@ -88,7 +88,7 @@
     .lesson-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px 24px; }
     .lesson-card { position: relative; min-height: 223px; display: flex; flex-direction: column; align-items: flex-start; padding: 24px 28px 24px 47px; overflow: hidden; border: 0; border-top: 1px solid #d8cfbe; border-bottom: 1px solid #d8cfbe; border-radius: 0; color: #202926; background: linear-gradient(90deg, rgba(0,73,54,.04), transparent 8%), repeating-linear-gradient(90deg, #fff 0, #fff 18px, rgba(91,77,48,.018) 19px), #fff; text-align: left; cursor: pointer; transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out), border-color .2s var(--ease-out), background .2s var(--ease-out); }
     .lesson-card::before { position: absolute; top: 18px; bottom: 18px; left: 20px; width: 2px; content: ""; background: linear-gradient(transparent, var(--school-green) 15px, var(--school-green) calc(100% - 15px), transparent); }
-    .lesson-card:hover { border-color: #b8a36c; box-shadow: 0 13px 28px rgba(51,46,35,.12); transform: translateY(-3px); }
+    .lesson-card:hover { border-color: #b8a36c; box-shadow: none; transform: translateY(-2px); }
     .lesson-card.selected { border-color: var(--school-green); background: linear-gradient(135deg, rgba(219,235,226,.76), #fff 58%); box-shadow: 0 13px 28px rgba(0,73,54,.14); }
     .lesson-card::after { position: absolute; top: 20px; right: 20px; width: 24px; height: 2px; content: ""; background: var(--vermilion); }
     .lesson-card.selected::after { width: 34px; background: var(--yellow); }
@@ -138,8 +138,9 @@
         <div class="step-heading"><span class="step-count">1</span><h2>指定文言篇章</h2></div>
         <div class="unit-tabs" role="tablist" aria-label="篇章群組">
           <button class="unit-tab selected" type="button" role="tab" aria-selected="true" data-exercise="lunren">《論仁論孝論君子》</button>
+          <button class="unit-tab" type="button" role="tab" aria-selected="false" data-exercise="yueyang">《岳陽樓記》</button>
           <button class="unit-tab" type="button" role="tab" aria-selected="false" data-exercise="limpo">《廉頗藺相如列傳》</button>
-          <button class="unit-tab" type="button" role="tab" aria-selected="false" disabled>更多篇章・日後加入</button>
+          <button class="unit-tab" type="button" role="tab" aria-selected="false" disabled>待加入篇章</button>
         </div>
       </div>
 
@@ -152,17 +153,24 @@
             <p class="card-author">孔子</p>
             <h3>《論仁、論孝、論君子》</h3>
             <p class="card-type">原文詞解・四選一辨義</p>
-            <p class="card-meta">可開始・30 個重點詞語</p>
+            <p class="card-meta">可開始辨義・30 個重點詞語</p>
+          </button>
+          <button class="lesson-card" type="button" data-exercise="yueyang" data-href="yueyang-interactive.html" data-title="范仲淹《岳陽樓記》" aria-pressed="false">
+            <p class="card-index">02</p>
+            <p class="card-author">范仲淹</p>
+            <h3>《岳陽樓記》</h3>
+            <p class="card-type">原文詞解・四選一辨義</p>
+            <p class="card-meta">可開始辨義・46 個重點詞語</p>
           </button>
           <button class="lesson-card" type="button" data-exercise="limpo" data-href="limpo-interactive.html" data-title="司馬遷《廉頗藺相如列傳》" aria-pressed="false">
-            <p class="card-index">02</p>
+            <p class="card-index">03</p>
             <p class="card-author">司馬遷</p>
             <h3>《廉頗藺相如列傳》</h3>
             <p class="card-type">原文詞解・四選一辨義</p>
-            <p class="card-meta">可開始・55 個重點詞語</p>
+            <p class="card-meta">可開始辨義・55 個重點詞語</p>
           </button>
           <div class="future-index" aria-label="預留的新增練習位置">
-            <div><strong>下一篇章，待加入</strong><span>新增練習後會在此顯示</span></div>
+            <div><strong>待加入篇章</strong><span>備註：新增練習後列於此處</span></div>
           </div>
         </div>
         <div class="launch-row">
