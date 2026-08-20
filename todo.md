@@ -34,3 +34,6 @@
 - [x] 將現有完整 GitHub 儲存庫改設為公開可見。
 - [x] 核對公開儲存庫與 GitHub Pages 連結均可讓學生免登入使用。
 - [x] 修正 GitHub Pages 根網址導向，讓學生自動進入篇章練習索引。
+- [x] 確認 kslochinese 用戶名稱可用，並完成 GitHub 帳戶改名。
+- [x] 核對公開儲存庫與 GitHub Pages 在新用戶名稱下的網址。
+- [x] 交付更新後的學生公開連結。
