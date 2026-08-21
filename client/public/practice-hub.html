@@ -76,24 +76,26 @@
     .step-count { display: grid; place-items: center; width: 28px; height: 28px; flex: 0 0 auto; border-radius: 50%; color: #fff9ea; background: var(--ink-soft); font-family: Georgia, "PMingLiU", serif; font-size: .9rem; font-weight: 600; }
     .step-heading h2 { margin: 0; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: 1.26rem; font-weight: 600; letter-spacing: .13em; }
     .step-heading::after { height: 1px; flex: 1; content: ""; background: var(--line); }
-    .unit-tabs { display: flex; flex-wrap: wrap; gap: 12px; }
-    .unit-tab { position: relative; padding: 12px 17px 12px 28px; border: 1px solid #d8cfbe; border-radius: 0; color: #48534e; background: #fffdf7; cursor: pointer; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: 1.06rem; letter-spacing: .05em; text-decoration: none; transition: transform .16s var(--ease-out), color .16s var(--ease-out), border-color .16s var(--ease-out), background .16s var(--ease-out); }
-    .unit-tab::before { position: absolute; top: 9px; bottom: 9px; left: 12px; width: 1px; content: ""; background: rgba(0,73,54,.4); }
+    /* 墨卷課堂索引：頁籤像書目紙條；墨綠直線、硃砂點及紙色層次取代通用按鈕語言。 */
+    .unit-tabs { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0 8px; border-bottom: 1px solid var(--line); }
+    .unit-tab { position: relative; margin: 0 0 -1px; padding: 12px 16px 11px 29px; border: 0; border-left: 1px solid rgba(0,73,54,.3); border-top: 1px solid rgba(216,207,190,.85); border-bottom: 2px solid transparent; border-radius: 0; color: #48534e; background: linear-gradient(90deg, rgba(0,73,54,.04), transparent 22%), #fffdf7; cursor: pointer; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: 1.06rem; letter-spacing: .05em; text-decoration: none; transition: transform .16s var(--ease-out), color .16s var(--ease-out), border-color .16s var(--ease-out), background .16s var(--ease-out); }
+    .unit-tab::before { position: absolute; top: 14px; left: 12px; width: 6px; height: 6px; content: ""; border-radius: 50%; background: var(--vermilion); opacity: .72; }
     .unit-tab:active, .lesson-card:active { transform: scale(.975); }
-    .unit-tab:hover { border-color: #ae9276; }
+    .unit-tab:hover { z-index: 1; border-left-color: var(--school-green); border-top-color: #ae9276; border-bottom-color: var(--school-green); color: var(--school-green-deep); background: linear-gradient(90deg, rgba(245,214,106,.25), transparent 36%), #fffdf7; }
 
     .step-hint { margin: 0 0 18px; padding: 12px 14px; border-left: 3px solid var(--yellow); color: #48534e; background: #f6f1e6; font-size: .95rem; line-height: 1.65; }
-    .lesson-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px 24px; }
-    .lesson-card { position: relative; min-height: 223px; display: flex; flex-direction: column; align-items: flex-start; padding: 24px 28px 24px 47px; overflow: hidden; border: 0; border-top: 1px solid #d8cfbe; border-bottom: 1px solid #d8cfbe; border-radius: 0; color: #202926; background: linear-gradient(90deg, rgba(0,73,54,.04), transparent 8%), repeating-linear-gradient(90deg, #fff 0, #fff 18px, rgba(91,77,48,.018) 19px), #fff; text-align: left; cursor: pointer; text-decoration: none; transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out), border-color .2s var(--ease-out), background .2s var(--ease-out); }
-    .lesson-card::before { position: absolute; top: 18px; bottom: 18px; left: 20px; width: 2px; content: ""; background: linear-gradient(transparent, var(--school-green) 15px, var(--school-green) calc(100% - 15px), transparent); }
-    .lesson-card:hover { border-color: #b8a36c; box-shadow: none; transform: translateY(-2px); }
-    .lesson-card::after { position: absolute; top: 20px; right: 20px; width: 24px; height: 2px; content: ""; background: var(--vermilion); }
-    .card-index { position: relative; margin: 0 0 18px; color: var(--vermilion); font-family: Georgia, serif; font-size: 1rem; letter-spacing: .08em; }
+    .lesson-grid { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 46px; }
+    .lesson-grid::before { position: absolute; top: 17px; bottom: 17px; left: 50%; width: 1px; content: ""; background: linear-gradient(transparent, rgba(0,73,54,.16) 8%, rgba(0,73,54,.16) 92%, transparent); }
+    .lesson-card { position: relative; min-height: 198px; display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 14px; padding: 22px 28px 22px 50px; overflow: hidden; border: 0; border-top: 1px solid #d8cfbe; border-bottom: 1px solid #d8cfbe; border-radius: 0; color: #202926; background: linear-gradient(90deg, rgba(0,73,54,.055), transparent 12%), repeating-linear-gradient(0deg, transparent 0, transparent 27px, rgba(91,77,48,.025) 28px), #fffdf9; text-align: left; cursor: pointer; text-decoration: none; transition: transform .2s var(--ease-out), border-color .2s var(--ease-out), background .2s var(--ease-out); }
+    .lesson-card::before { position: absolute; top: 16px; bottom: 16px; left: 20px; width: 2px; content: ""; background: linear-gradient(transparent, var(--school-green) 13px, var(--school-green) calc(100% - 13px), transparent); }
+    .lesson-card:hover { border-color: #b8a36c; background: linear-gradient(90deg, rgba(245,214,106,.28), transparent 18%), repeating-linear-gradient(0deg, transparent 0, transparent 27px, rgba(91,77,48,.025) 28px), #fffdf9; transform: translateX(3px); }
+    .lesson-card::after { position: absolute; top: 20px; right: 20px; width: 25px; height: 2px; content: ""; background: var(--vermilion); }
+    .card-index { position: relative; margin: 0 0 13px; color: var(--vermilion); font-family: Georgia, serif; font-size: .94rem; letter-spacing: .12em; }
     .card-index::before { display: inline-block; width: 6px; height: 6px; margin: 0 8px 1px 0; content: ""; border-radius: 50%; background: var(--vermilion); vertical-align: middle; }
-    .card-author { margin: 0; color: #69716c; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: .92rem; font-weight: 600; letter-spacing: .12em; }
-    .lesson-card h3 { margin: 5px 0 7px; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: clamp(1.65rem, 3.2vw, 2.16rem); font-weight: 600; letter-spacing: .06em; line-height: 1.32; }
-    .card-type { margin: 0; color: #67706a; font-size: .9rem; }
-    .card-meta { display: flex; align-items: center; gap: 8px; margin-top: auto; padding: 5px 8px; color: #4a4539; background: linear-gradient(transparent 16%, rgba(245,214,106,.84) 16%, rgba(245,214,106,.84) 88%, transparent 88%); font-size: .86rem; font-weight: 800; }
+    .card-author { margin: 0; color: #69716c; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: .82rem; font-weight: 600; letter-spacing: .16em; }
+    .lesson-card h3 { margin: 5px 0 7px; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: clamp(1.6rem, 3vw, 2.08rem); font-weight: 600; letter-spacing: .065em; line-height: 1.32; }
+    .card-type { margin: 0; color: #7b827d; font-size: .78rem; letter-spacing: .09em; }
+    .card-meta { display: flex; align-items: center; gap: 8px; margin-top: auto; padding: 5px 8px; color: #4a4539; background: linear-gradient(transparent 16%, rgba(245,214,106,.84) 16%, rgba(245,214,106,.84) 88%, transparent 88%); font-size: .82rem; font-weight: 800; }
     .card-meta::before { width: 7px; height: 7px; content: ""; border-radius: 50%; background: var(--vermilion); }
     @media (max-width: 700px) {
       .topbar { min-height: 64px; }
@@ -103,6 +105,7 @@
       main { width: min(100% - 28px, 1080px); padding-top: 38px; }
       .intro { padding-left: 23px; }
       .lesson-grid { grid-template-columns: 1fr; }
+      .lesson-grid::before { display: none; }
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
   </style>
@@ -124,6 +127,7 @@
           <a class="unit-tab" href="shishuo-interactive.html">《師說》</a>
           <a class="unit-tab" href="liuguolun-interactive.html">《六國論》</a>
           <a class="unit-tab" href="yuwoyusuo-interactive.html">《魚我所欲也》</a>
+          <a class="unit-tab" href="xiaoyaoyou-interactive.html">《逍遙遊》</a>
         </div>
       </div>
 
@@ -172,6 +176,13 @@
             <h3>《魚我所欲也》</h3>
             <p class="card-type">原文詞解</p>
             <p class="card-meta">27 個重點詞語</p>
+          </a>
+          <a class="lesson-card" href="xiaoyaoyou-interactive.html" aria-label="開啟莊子《逍遙遊》互動練習">
+            <p class="card-index">07</p>
+            <p class="card-author">莊子</p>
+            <h3>《逍遙遊》</h3>
+            <p class="card-type">原文詞解</p>
+            <p class="card-meta">31 個重點詞語</p>
           </a>
         </div>
       </div>

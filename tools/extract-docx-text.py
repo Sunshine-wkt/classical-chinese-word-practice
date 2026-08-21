@@ -1,8 +1,9 @@
 from pathlib import Path
+import sys
 from docx import Document
 
-source_path = Path('source/reference/yuwoyusuo-notes.docx')
-output_path = Path('source/reference/yuwoyusuo-notes.txt')
+source_path = Path(sys.argv[1]) if len(sys.argv) > 1 else Path('source/reference/yuwoyusuo-notes.docx')
+output_path = Path(sys.argv[2]) if len(sys.argv) > 2 else source_path.with_suffix('.txt')
 
 document = Document(source_path)
 lines = []
