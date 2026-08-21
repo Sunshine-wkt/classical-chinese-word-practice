@@ -9,9 +9,9 @@ const html = fs.readFileSync(htmlPath, 'utf8');
 const coverage = fs.readFileSync(path.join(projectRoot, 'source/yuwoyusuo-annotation-coverage.md'), 'utf8');
 const excerpts = fs.readFileSync(path.join(projectRoot, 'source/yuwoyusuo-sentence-excerpts.md'), 'utf8');
 
-assert.equal(terms.length, 28, '筆記 18 則注釋必須拆為 28 個題目。');
+assert.equal(terms.length, 27, '筆記 18 則注釋依教師指定應設為 27 個題目。');
 assert.match(coverage, /18 則筆記注釋/);
-assert.match(coverage, /28 個互動詞語題目/);
+assert.match(coverage, /27 個互動詞語題目/);
 assert.match(html, new RegExp(`<title>${lesson.author}《${lesson.title}》｜原文及詞解</title>`));
 assert.match(html, /href="practice-hub\.html">返回目錄<\/a>/);
 assert.match(html, /const done=new Set,first=new Set,tries=new Map/);
