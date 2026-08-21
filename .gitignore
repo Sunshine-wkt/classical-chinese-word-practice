@@ -111,3 +111,6 @@ temp/
 # Manus version file (auto-generated, not part of source)
 client/public/__manus__/version.json
 .project-config.json
+
+# 暫存的官方原文與校本筆記原始檔：公開儲存庫只保留來源記錄及覆蓋表。
+source/reference/
