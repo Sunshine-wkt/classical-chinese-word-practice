@@ -18,6 +18,10 @@ assert.match(html, /錯誤/);
 assert.match(html, /confirm\('確定要重設本課的完成進度嗎？'\)/);
 assert.match(html, /sentence\.textContent=\`原句：\$\{t\.excerpt\}\`/);
 assert.doesNotMatch(html, /querySelector\('\.passage p'\)/);
+assert.match(html, /data-ids="zhen,xiangzhen">枕<\/button>/, '「相枕」只可標示目標字「枕」。');
+assert.doesNotMatch(html, /data-ids="zhen,xiangzhen">相枕<\/button>/, '不得把「相枕」整詞標示為黃箋。');
+assert.match(html, /data-ids="ming,minghe">冥<\/button>合/, '「冥合」只可標示目標字「冥」。');
+assert.doesNotMatch(html, /data-ids="ming,minghe">冥合<\/button>/, '不得把「冥合」整詞標示為黃箋。');
 
 const markedIds = new Set([...html.matchAll(/data-ids="([^"]+)"/g)].flatMap((match) => match[1].split(',')));
 assert.equal(markedIds.size, terms.length, '所有拆分後題目均須對應到原文詞語位置。');
