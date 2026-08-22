@@ -68,6 +68,17 @@
     h1 { max-width: 780px; margin: 0; font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: clamp(2.25rem, 6vw, 4.4rem); font-weight: 500; letter-spacing: .08em; line-height: 1.15; }
     .intro p:last-child { max-width: 630px; margin: 20px 0 0; color: #4f5a55; font-size: clamp(1rem, 2vw, 1.12rem); line-height: 1.9; }
 
+    .platform-intro { position: relative; margin: 0 0 24px; padding: clamp(28px, 5vw, 42px) clamp(28px, 7vw, 72px); overflow: hidden; border: 1px solid rgba(143,125,95,.3); border-left: 7px solid var(--school-green); background: linear-gradient(135deg, rgba(0,73,54,.055), transparent 40%), rgba(255,253,247,.96); box-shadow: 0 18px 45px rgba(31,38,37,.1), 0 2px 0 rgba(255,255,255,.72) inset; }
+    .platform-intro::after { position: absolute; top: 28px; right: 34px; width: 34px; height: 2px; content: ""; background: var(--vermilion); }
+    .platform-heading { display: flex; align-items: center; gap: 12px; margin: 0 0 15px; }
+    .platform-number { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: #fff9ea; background: var(--school-green); font-family: Georgia, "PMingLiU", serif; font-size: .9rem; font-weight: 600; }
+    .platform-heading h2 { margin: 0; color: var(--ink); font-family: "BiauKai", "DFKai-SB", "PMingLiU", serif; font-size: clamp(1.38rem, 2.5vw, 1.68rem); font-weight: 600; letter-spacing: .12em; }
+    .platform-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; color: #48534e; }
+    .platform-list li { position: relative; padding: 11px 14px 11px 29px; border-left: 2px solid rgba(0,73,54,.3); background: rgba(246,241,230,.68); font-size: .94rem; line-height: 1.72; }
+    .platform-list li::before { position: absolute; top: 1.03em; left: 12px; width: 6px; height: 6px; content: ""; border-radius: 50%; background: var(--vermilion); }
+    .platform-list strong { color: var(--school-green-deep); }
+    .platform-copyright { margin: 15px 0 0; padding: 13px 15px; border-top: 1px solid rgba(0,73,54,.18); color: #4f5a55; background: #fffdf7; font-size: .88rem; font-weight: 700; line-height: 1.7; }
+
     .panel { position: relative; overflow: hidden; border: 1px solid rgba(143,125,95,.3); background: rgba(255,253,247,.96); box-shadow: 0 22px 55px rgba(31,38,37,.12), 0 2px 0 rgba(255,255,255,.72) inset; }
     .panel::before { position: absolute; top: 0; bottom: 0; left: 0; width: 7px; content: ""; background: var(--ink-soft); opacity: .78; }
     .step { padding: clamp(27px, 5vw, 42px) clamp(28px, 7vw, 72px); border-bottom: 1px solid var(--line); }
@@ -104,6 +115,9 @@
       .brand { gap: 9px; font-size: .96rem; letter-spacing: .035em; }
       main { width: min(100% - 28px, 1080px); padding-top: 38px; }
       .intro { padding-left: 23px; }
+      .platform-intro { padding: 25px 22px; }
+      .platform-intro::after { top: 22px; right: 22px; }
+      .platform-list li { padding-left: 27px; font-size: .9rem; }
       .lesson-grid { grid-template-columns: 1fr; }
       .lesson-grid::before { display: none; }
     }
@@ -117,6 +131,16 @@
   </header>
 
   <main>
+    <section class="platform-intro" aria-labelledby="platform-intro-title">
+      <div class="platform-heading"><span class="platform-number">i</span><h2 id="platform-intro-title">平台簡介</h2></div>
+      <ul class="platform-list">
+        <li>本平台建基於<strong>本校中文科 DSE 指定篇章筆記「一、重點詞解」</strong>編製，供課堂學習及自主溫習使用。</li>
+        <li>學生毋須登入，點選原文黃箋詞語即可進行詞義練習；系統設有首次答對計分、補答及完成摘要。</li>
+        <li>答題紀錄只保存在學生正在使用的手機或電腦瀏覽器內，可查看進度、下載備份或自行清除；平台不收集姓名、電郵、學號或個別作答資料。</li>
+        <li>更換裝置、使用無痕模式或清除瀏覽器資料後，本機紀錄可能無法保留，建議有需要時先下載備份。</li>
+      </ul>
+      <p class="platform-copyright">校本筆記、題目內容及平台設計的版權均予保留；未經授權，請勿複製、轉載、修改或作商業用途。</p>
+    </section>
     <section class="panel" aria-label="互動練習選擇器">
       <div class="step">
         <div class="step-heading"><span class="step-count">1</span><h2>指定文言篇章</h2></div>
