@@ -39,4 +39,4 @@
     function openNext(trigger){const ids=trigger.dataset.ids.split(',');open(ids.find(id=>!done.has(id))||ids[0],trigger)} function close(){bg.classList.remove('open');bg.setAttribute('aria-hidden','true');if(previous)previous.focus();active=null}
     document.querySelectorAll('.term').forEach(b=>b.onclick=()=>openNext(b));document.getElementById('close').onclick=close;bg.onclick=e=>{if(e.target===bg)close()};document.addEventListener('keydown',e=>{if(e.key==='Escape'&&active)close()});document.getElementById('reset').onclick=()=>{if(!done.size||confirm('確定要重設本課的完成進度嗎？')){done.clear();first.clear();tries.clear();document.getElementById('summary').hidden=true;update();if(active)close()}};update();
   </script>
-<script src="practice-records.js" defer></script></body></html>
+<script src="practice-records-v2.js" defer></script></body></html>

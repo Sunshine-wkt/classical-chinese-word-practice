@@ -4,8 +4,8 @@ import path from "node:path";
 
 const projectRoot = path.resolve(import.meta.dirname, "..");
 const publicDir = path.join(projectRoot, "client", "public");
-const script = fs.readFileSync(path.join(publicDir, "practice-records.js"), "utf8");
-const scriptTag = '<script src="practice-records.js" defer></script>';
+const script = fs.readFileSync(path.join(publicDir, "practice-records-v2.js"), "utf8");
+const scriptTag = '<script src="practice-records-v2.js" defer></script>';
 const pages = fs.readdirSync(publicDir).filter(file => file.endsWith("-interactive.html"));
 
 assert.equal(pages.length, 12, "必須保留十二篇互動頁。");
