@@ -21,6 +21,8 @@ assert.match(html, /錯誤/);
 assert.match(html, /confirm\('確定要重設本課的完成進度嗎？'\)/);
 assert.match(html, /sentence\.textContent=\`原句：\$\{t\.excerpt\}\`/);
 assert.doesNotMatch(html, /https?:\/\/|fonts\.google|cdn\./);
+assert.match(passages[1], /非\{\{li,lizu\|利\}\}足也/, '「利足」必須只以「利」作黃箋標示。');
+assert.doesNotMatch(passages[1], /\{\{li,lizu\|利足\}\}/, '「利足」不得整詞標示。');
 
 const markedIds = new Set([...html.matchAll(/data-ids="([^"]+)"/g)].flatMap((match) => match[1].split(',')));
 assert.equal(markedIds.size, terms.length, '所有拆分後題目均須對應到原文詞語位置。');
