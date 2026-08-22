@@ -1,5 +1,5 @@
 // 資料依據：教育局《唐詩三首》官方原文及教師提供的「一、重點詞解」截圖。
-export const lesson = { title: '唐詩三首', author: '王維、李白、杜甫', index: '第九篇' };
+export const lesson = { title: '詩三首', author: '王維、李白、杜甫', index: '第九篇' };
 
 export const passages = [
   {

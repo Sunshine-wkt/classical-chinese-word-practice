@@ -5,7 +5,7 @@ import { lesson, passages, terms } from '../source/tangshi-question-data.mjs';
 const projectRoot = path.resolve(import.meta.dirname, '..');
 const basePage = fs.readFileSync(path.join(projectRoot, 'client/public/xiaoyaoyou-interactive.html'), 'utf8');
 const inheritedStyle = basePage.match(/<style>([\s\S]*?)<\/style>/)?.[1];
-const style = `${inheritedStyle?.replace('第七篇・莊子', `${lesson.index}・唐詩三首`)}
+const style = `${inheritedStyle?.replace('第七篇・莊子', `${lesson.index}・${lesson.title}`)}
 /* 第九篇三詩分節：維持墨卷課堂閱讀節奏，加入詩題書籤及手機頂欄的長標題處理。 */
 .poem-heading{margin:36px 0 4px;padding:12px 0 10px;border-top:2px solid #004936;color:#004936;font-family:"BiauKai","DFKai-SB","PMingLiU",serif;font-size:1.38rem;font-weight:600;letter-spacing:.1em}.poem-heading:first-of-type{margin-top:0}.poem-heading .term{font:inherit}.poem-heading+.passage{border-top:1px dashed #cfc5b4}
 @media(max-width:650px){.bar{align-items:center;gap:8px;padding:9px 12px}.brand{flex:1;max-width:none;gap:7px;font-size:.85rem;letter-spacing:.02em;line-height:1.2}.brand>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tools{width:122px;flex:0 0 122px;flex-direction:row;flex-wrap:wrap;justify-content:flex-end;gap:5px}.score{width:100%;font-size:.67rem;text-align:right;white-space:nowrap}.reset,.return-link{padding:6px 7px;font-size:.8rem;line-height:1.2}.poem-heading{margin-top:28px;font-size:1.22rem}}

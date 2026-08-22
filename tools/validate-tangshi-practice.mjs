@@ -12,7 +12,7 @@ assert.equal(terms.length, 23, '教師筆記 18 則注釋必須拆為 23 個題�
 assert.match(coverage, /18 則編號注釋/);
 assert.match(coverage, /23 個互動詞語題目/);
 assert.match(html, new RegExp(`<title>《${lesson.title}》｜原文及詞解</title>`));
-assert.match(html, /第九篇・唐詩三首/);
+assert.match(html, new RegExp(`${lesson.index}・${lesson.title}`));
 assert.match(html, /href="practice-hub\.html">返回目錄<\/a>/);
 assert.match(html, /const done=new Set,first=new Set,tries=new Map/);
 assert.match(html, /錯誤/);
