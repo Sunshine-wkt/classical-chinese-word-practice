@@ -3,8 +3,8 @@ import path from "node:path";
 
 const projectRoot = path.resolve(import.meta.dirname, "..");
 const publicDir = path.join(projectRoot, "client", "public");
-const scriptTag = '<script src="practice-records-v2.js" defer></script>';
-const legacyScriptPattern = /<script src="practice-records(?:-v2)?\.js" defer><\/script>/g;
+const scriptTag = '<script src="practice-records-v3.js" defer></script>';
+const legacyScriptPattern = /<script src="practice-records(?:-v2|-v3)?\.js" defer><\/script>/g;
 const pages = fs.readdirSync(publicDir).filter(file => file.endsWith("-interactive.html"));
 
 if (pages.length !== 12) throw new Error(`預期 12 篇互動頁，實際找到 ${pages.length} 篇。`);

@@ -36,12 +36,13 @@
     return String(value).replace(/[&<>'"]/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]);
   }
 
-  function addCardProgressStyles() {
+  function addHubControlStyles() {
     if (document.getElementById("card-progress-styles")) return;
     const style = document.createElement("style");
     style.id = "card-progress-styles";
     style.textContent = `
       .lesson-card .card-progress{display:grid;gap:4px;width:100%;margin:13px 0 8px;padding:9px 11px;border-left:2px solid rgba(0,73,54,.42);background:rgba(246,241,230,.72);color:#4f5a55;font-size:.78rem;line-height:1.5}.lesson-card .card-progress strong{color:#004936;font-size:.84rem;letter-spacing:.02em}.lesson-card .card-progress.is-empty{border-left-color:rgba(143,125,95,.45);color:#7b827d;background:rgba(246,241,230,.48)}
+      .clear-record-control{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 24px;padding:15px 18px;border:1px solid rgba(143,125,95,.3);border-left:5px solid rgba(0,73,54,.62);background:rgba(255,253,247,.9);box-shadow:0 8px 20px rgba(31,38,37,.06)}.clear-record-copy{margin:0;color:#53605a;font-size:.88rem;line-height:1.6}.clear-record-button{flex:0 0 auto;min-height:40px;padding:9px 13px;border:1px solid rgba(169,66,53,.5);border-radius:0;color:#8b382e;background:#fffdf7;font:inherit;font-size:.88rem;font-weight:700;cursor:pointer;transition:transform .16s cubic-bezier(.23,1,.32,1),background .16s cubic-bezier(.23,1,.32,1),color .16s cubic-bezier(.23,1,.32,1)}.clear-record-button:hover{color:#fff9ea;background:#a94235}.clear-record-button:active{transform:scale(.97)}.clear-record-status{margin:8px 0 0;color:#59645f;font-size:.82rem;line-height:1.5}@media(max-width:700px){.clear-record-control{align-items:flex-start;flex-direction:column;gap:10px;padding:15px 16px}.clear-record-button{width:100%}}
     `;
     document.head.appendChild(style);
   }
@@ -76,9 +77,41 @@
     });
   }
 
+  function addClearRecordControl() {
+    const intro = document.querySelector(".platform-intro");
+    if (!intro || document.getElementById("clear-all-records")) return;
+    const control = document.createElement("section");
+    control.id = "clear-all-records";
+    control.className = "clear-record-control";
+    control.setAttribute("aria-label", "本機答題紀錄設定");
+    control.innerHTML = `<div><p class="clear-record-copy">不想保留這部裝置的練習紀錄？可清除所有本機紀錄，題目內容不受影響。</p><p class="clear-record-status" aria-live="polite"></p></div><button class="clear-record-button" type="button">清除所有記錄</button>`;
+    intro.insertAdjacentElement("afterend", control);
+    const button = control.querySelector("button");
+    const status = control.querySelector(".clear-record-status");
+    button.addEventListener("click", () => {
+      if (!readRecords().length) {
+        status.textContent = "目前沒有可清除的本機記錄。";
+        return;
+      }
+      const approved = window.confirm("確定清除這部裝置內所有篇章的答題紀錄嗎？此操作無法復原，題目內容不會受影響。");
+      if (!approved) {
+        status.textContent = "已保留本機答題紀錄。";
+        return;
+      }
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+        renderHub();
+        status.textContent = "已清除這部裝置的所有本機答題紀錄。";
+      } catch {
+        status.textContent = "目前無法清除本機答題紀錄，請在瀏覽器設定中清除本網站資料。";
+      }
+    });
+  }
+
   function renderHub() {
     if (!document.querySelector(".lesson-card")) return;
-    addCardProgressStyles();
+    addHubControlStyles();
+    addClearRecordControl();
     const grouped = new Map();
     readRecords().forEach(record => {
       const current = grouped.get(record.practiceId) || { best: 0, total: record.questionCount, latest: record.completedAt };

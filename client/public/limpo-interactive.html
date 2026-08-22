@@ -68,5 +68,5 @@
     function close(){backdrop.classList.remove('show');backdrop.setAttribute('aria-hidden','true');active=null;if(previous)previous.focus()}
     document.querySelectorAll('.term').forEach(b=>b.addEventListener('click',()=>open(b.dataset.id,b)));document.getElementById('close').addEventListener('click',close);backdrop.addEventListener('click',e=>{if(e.target===backdrop)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&active)close()});document.getElementById('reset').addEventListener('click',()=>{if(completed.size===0||confirm('確定要重設本課的完成進度嗎？')){completed.clear();firstTry.clear();attempts.clear();document.getElementById('summary').hidden=true;progress();if(active)close()}});progress();
   </script>
-<script src="practice-records-v2.js" defer></script></body>
+<script src="practice-records-v3.js" defer></script></body>
 </html>

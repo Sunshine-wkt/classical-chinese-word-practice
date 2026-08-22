@@ -4,8 +4,8 @@ import path from "node:path";
 
 const projectRoot = path.resolve(import.meta.dirname, "..");
 const publicDir = path.join(projectRoot, "client", "public");
-const script = fs.readFileSync(path.join(publicDir, "practice-records-v2.js"), "utf8");
-const scriptTag = '<script src="practice-records-v2.js" defer></script>';
+const script = fs.readFileSync(path.join(publicDir, "practice-records-v3.js"), "utf8");
+const scriptTag = '<script src="practice-records-v3.js" defer></script>';
 const pages = fs.readdirSync(publicDir).filter(file => file.endsWith("-interactive.html"));
 
 assert.equal(pages.length, 12, "必須保留十二篇互動頁。");
@@ -26,7 +26,11 @@ assert.match(script, /renderCardProgress/, "本機紀錄模組必須更新十二
 assert.match(script, /最近完成/, "篇章卡必須顯示最近完成日期。 ");
 assert.match(script, /最佳首次答對/, "篇章卡必須顯示最佳首次答對分數。 ");
 assert.match(script, /尚未完成此篇練習/, "未完成篇章必須提供清晰空狀態。 ");
-assert.doesNotMatch(script, /我的答題紀錄|下載備份|清除本機紀錄/, "目錄頁不得再顯示答題紀錄摘要或備份控制項。 ");
+assert.match(script, /clear-all-records/, "目錄頁必須提供清除所有本機紀錄的控制項。 ");
+assert.match(script, /清除所有記錄/, "清除控制項必須清楚標示用途。 ");
+assert.match(script, /window\.confirm\(/, "清除本機紀錄前必須再次確認。 ");
+assert.match(script, /localStorage\.removeItem\(STORAGE_KEY\)/, "清除控制項必須只刪除本平台的本機紀錄。 ");
+assert.doesNotMatch(script, /我的答題紀錄|下載備份/, "目錄頁不得再顯示答題紀錄摘要或備份控制項。 ");
 assert.doesNotMatch(script, /fetch\(|XMLHttpRequest|axios|\/api\//, "本機紀錄模組不得傳送網絡請求。 ");
 
 console.log(`本機答題紀錄驗證通過：${pages.length} 篇互動頁、統一目錄及零網絡傳送規則均符合要求。`);
