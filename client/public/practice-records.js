@@ -65,6 +65,9 @@
       .local-records{margin:0 0 24px;padding:clamp(25px,5vw,38px);border:1px solid rgba(143,125,95,.3);border-left:7px solid #004936;background:rgba(255,253,247,.96);box-shadow:0 16px 40px rgba(31,38,37,.1)}
       .local-record-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}.local-record-head h2{margin:0;color:#004936;font-family:"BiauKai","DFKai-SB","PMingLiU",serif;font-size:1.5rem;letter-spacing:.11em}.local-record-head p{max-width:620px;margin:9px 0 0;color:#4f5a55;line-height:1.75}.local-record-actions{display:flex;flex-wrap:wrap;gap:8px}.local-record-button{padding:8px 10px;border:1px solid #00493666;border-radius:3px;color:#004936;background:#fffdf7;cursor:pointer}.local-record-button:hover{background:#e9f4ef}.local-record-button.danger{border-color:#a9423566;color:#8b3228}.local-record-button.danger:hover{background:#fbefec}.local-record-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:20px 0 14px}.local-record-stat{padding:13px 15px;border-left:3px solid #f5d66a;background:#f6f1e6}.local-record-stat strong{display:block;color:#004936;font:1.5rem Georgia,serif}.local-record-stat span{display:block;margin-top:2px;color:#68716c;font-size:.82rem}.local-record-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.local-record-card{padding:14px 16px;border:1px solid #d8cfbe;background:#fffdf9}.local-record-card h3{margin:0;color:#004936;font-family:"BiauKai","DFKai-SB","PMingLiU",serif;font-size:1.08rem;letter-spacing:.05em}.local-record-card p{margin:7px 0 0;color:#4f5a55;font-size:.88rem;line-height:1.65}.local-record-empty{margin:18px 0 0;padding:16px;border-left:3px solid #f5d66a;background:#f6f1e6;color:#4f5a55;line-height:1.7}@media(max-width:700px){.local-record-head{display:block}.local-record-actions{margin-top:14px}.local-record-summary,.local-record-list{grid-template-columns:1fr}}
     `;
+    style.textContent += `
+      .lesson-card .card-progress{display:grid;gap:4px;width:100%;margin:13px 0 8px;padding:9px 11px;border-left:2px solid rgba(0,73,54,.42);background:rgba(246,241,230,.72);color:#4f5a55;font-size:.78rem;line-height:1.5}.lesson-card .card-progress strong{color:#004936;font-size:.84rem;letter-spacing:.02em}.lesson-card .card-progress.is-empty{border-left-color:rgba(143,125,95,.45);color:#7b827d;background:rgba(246,241,230,.48)}
+    `;
     document.head.appendChild(style);
   }
 
@@ -85,6 +88,7 @@
     });
     const passages = [...grouped.values()].sort((left, right) => new Date(right.latest) - new Date(left.latest));
     const bestRecord = records.reduce((best, record) => !best || record.firstTryCorrect / record.questionCount > best.firstTryCorrect / best.questionCount ? record : best, null);
+    renderCardProgress(grouped);
 
     const section = document.createElement("section");
     section.id = "local-records";
@@ -106,6 +110,38 @@
   function renderHubAfterClear(section) {
     section.remove();
     renderHub();
+  }
+
+  function formatShortDate(value) {
+    try {
+      return new Date(value).toLocaleDateString("zh-HK", { year: "numeric", month: "short", day: "numeric" });
+    } catch {
+      return "日期未能顯示";
+    }
+  }
+
+  function renderCardProgress(grouped) {
+    document.querySelectorAll(".lesson-card[href]").forEach(card => {
+      const href = card.getAttribute("href") || "";
+      const cardPracticeId = href.split("/").pop()?.replace(/-interactive\.html(?:\?.*)?$/i, "") || "";
+      const record = grouped.get(cardPracticeId);
+      let progress = card.querySelector(".card-progress");
+      if (!progress) {
+        progress = document.createElement("div");
+        progress.className = "card-progress";
+        const meta = card.querySelector(".card-meta");
+        if (meta) meta.before(progress); else card.appendChild(progress);
+      }
+
+      if (!record) {
+        progress.className = "card-progress is-empty";
+        progress.textContent = "尚未完成此篇練習";
+        return;
+      }
+
+      progress.className = "card-progress";
+      progress.innerHTML = `<span>最近完成：${escapeHtml(formatShortDate(record.latest))}</span><strong>最佳首次答對：${record.best} / ${record.total}</strong>`;
+    });
   }
 
   function getPracticeRuntime() {

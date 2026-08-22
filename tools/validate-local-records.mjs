@@ -24,6 +24,10 @@ assert.match(script, /firstTryCorrect/, "本機紀錄模組必須相容《論仁
 assert.match(script, /attemptsByTerm/, "本機紀錄模組必須相容《論仁、論孝、論君子》的作答次數狀態。 ");
 assert.match(script, /firstTry/, "本機紀錄模組必須相容《廉頗藺相如列傳》的首次答對狀態。 ");
 assert.match(script, /unlock-panel/, "本機紀錄模組必須相容《論仁、論孝、論君子》的完成摘要容器。 ");
+assert.match(script, /renderCardProgress/, "本機紀錄模組必須更新十二張篇章卡的進度摘要。 ");
+assert.match(script, /最近完成/, "篇章卡必須顯示最近完成日期。 ");
+assert.match(script, /最佳首次答對/, "篇章卡必須顯示最佳首次答對分數。 ");
+assert.match(script, /尚未完成此篇練習/, "未完成篇章必須提供清晰空狀態。 ");
 assert.doesNotMatch(script, /fetch\(|XMLHttpRequest|axios|\/api\//, "本機紀錄模組不得傳送網絡請求。 ");
 
 console.log(`本機答題紀錄驗證通過：${pages.length} 篇互動頁、統一目錄及零網絡傳送規則均符合要求。`);
