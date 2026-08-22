@@ -48,5 +48,5 @@
     function open(id,trigger){const t=map[id];active=id;previous=trigger;mt.textContent=t.word;sentence.textContent=`原句：${t.excerpt}`;done.has(id)?content.innerHTML=`<p class="answer">正確答案：${t.meaning}</p>`:options(t);bg.classList.add('open');bg.setAttribute('aria-hidden','false');document.getElementById('close').focus()}
     function close(){bg.classList.remove('open');bg.setAttribute('aria-hidden','true');if(previous)previous.focus();active=null}document.querySelectorAll('.term').forEach(b=>b.onclick=()=>open(b.dataset.id,b));document.getElementById('close').onclick=close;bg.onclick=e=>{if(e.target===bg)close()};document.addEventListener('keydown',e=>{if(e.key==='Escape'&&active)close()});document.getElementById('reset').onclick=()=>{if(!done.size||confirm('確定要重設本課的完成進度嗎？')){done.clear();first.clear();tries.clear();update();if(active)close()}};update();
   </script>
-</body>
+<script src="practice-records.js" defer></script></body>
 </html>
